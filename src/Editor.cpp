@@ -118,6 +118,7 @@ void Editor::handleInput(int c) {
             break;
         case KEY_ENTER:
         case 10:
+            if (y + 1 > LINES - 3) break;
             if(x < buff->lines[y].length()) {
                 buff->insertLine(buff->lines[y].substr(x, buff->lines[y].length() - x), y + 1);
                 buff->lines[y].erase(x, buff->lines[y].length() - x);
