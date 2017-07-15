@@ -177,7 +177,7 @@ void Editor::moveDown() {
 }
 
 void Editor::printBuff(WINDOW * win) {
-    for(int i=0; i<LINES-2; i++) {
+    for(int i=0; i<LINES-1; i++) {
         if(i >= buff->lines.size()) {
             move(i, 0);
             wclrtoeol(win);

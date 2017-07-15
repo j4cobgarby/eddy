@@ -23,7 +23,7 @@ void curses_init()
     wclrtoeol(title_win);
     wrefresh(title_win);
 
-    editor_win = newwin(LINES - 2, COLS, 1, 0);
+    editor_win = newwin(LINES - 1, COLS, 1, 0);
 }
 
 int main(int argc, char* argv[])
