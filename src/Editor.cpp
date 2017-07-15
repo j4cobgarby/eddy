@@ -205,8 +205,8 @@ void Editor::deleteLine(int i) {
 }
 
 void Editor::saveFile() {
-    if(filename == "") {
-        filename = "untitled";
+    if (filename == "") {
+        filename = "jedit-untitled";
     }
 
     ofstream f(filename.c_str());
