@@ -18,7 +18,9 @@ void curses_init()
     raw();
     keypad(stdscr, true);
     title_win = newwin(1, COLS, 0, 0);
-    wprintw(title_win, "jedit alpha");
+    wattron(title_win, A_REVERSE);
+    wprintw(title_win, "jedit alpha, written by j4cobgarby");
+    wclrtoeol(title_win);
     wrefresh(title_win);
 
     editor_win = newwin(LINES - 2, COLS, 1, 0);
