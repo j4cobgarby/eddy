@@ -178,7 +178,7 @@ void Editor::moveDown() {
 void Editor::printBuff(WINDOW * win) {
     for(int i=0; i<LINES-2; i++) {
         if(i >= buff->lines.size()) {
-            wmove(win, i, 0);
+            move(i, 0);
             wclrtoeol(win);
         }
         else {
@@ -186,7 +186,7 @@ void Editor::printBuff(WINDOW * win) {
         }
         wclrtoeol(win);
     }
-    wmove(win, y, x);
+    move(y+1, x);
 }
 
 void Editor::printStatusLine() {
