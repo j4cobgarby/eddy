@@ -16,9 +16,9 @@ void curses_init()
     noecho();
     raw();
     keypad(stdscr, true);
-    win = newwin(1, COLS, 0, 0);
-    wprintw(win, "jedit alpha");
-    wrefresh(win);
+    title = newwin(1, COLS, 0, 0);
+    wprintw(title, "jedit alpha");
+    wrefresh(title);
 }
 
 int main(int argc, char* argv[])
@@ -43,10 +43,10 @@ int main(int argc, char* argv[])
         ed.updateStatus();
         ed.printStatusLine();
         ed.printBuff();
-        redrawwin(win);
+        redrawwin(title);
         int input = getch();
         ed.handleInput(input);
-        wrefresh(win);
+        wrefresh(title);
     }
 
 
