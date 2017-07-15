@@ -7,7 +7,7 @@
 using namespace std;
 
 Editor::Editor() {
-    x = 0; y = 0;
+    x = 0; y = 1;
     mode = 'n';
     status = "Normal Mode";
     filename = "untitled";
@@ -17,7 +17,7 @@ Editor::Editor() {
 }
 
 Editor::Editor(string fn) {
-    x = 0; y = 0;
+    x = 0; y = 1;
     mode = 'n';
     status = "Normal Mode";
     filename = fn;
@@ -96,8 +96,8 @@ void Editor::handleInput(int c) {
             break;
         case 127:
         case KEY_BACKSPACE:
-            if (x == 0 && y == 0) break;
-            if (x == 0 && y > 0) {
+            if (x == 0 && y == 1) break;
+            if (x == 0 && y > 1) {
                 x = buff->lines[y-1].length();
                 buff->lines[y-1] += buff->lines[y];
                 deleteLine();
@@ -160,7 +160,7 @@ void Editor::moveRight() {
 }
 
 void Editor::moveUp() {
-    if(y-1 >= 0)
+    if(y-1 >= 1)
         y--;
     if(x >= buff->lines[y].length())
         x = buff->lines[y].length();
@@ -176,7 +176,7 @@ void Editor::moveDown() {
 }
 
 void Editor::printBuff() {
-    for(int i=0; i<LINES-1; i++) {
+    for(int i=1; i<LINES-2; i++) {
         if(i >= buff->lines.size()) {
             move(i, 0);
             clrtoeol();

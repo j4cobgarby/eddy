@@ -1,10 +1,14 @@
 #include <ncurses.h>
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 
 #include "Editor.h"
 
 using namespace std;
+
+WINDOW * win;
 
 void curses_init()
 {
@@ -12,6 +16,9 @@ void curses_init()
     noecho();
     raw();
     keypad(stdscr, true);
+    win = newwin(1, COLS, 0, 0);
+    wprintw(win, "jedit alpha");
+    wrefresh(win);
 }
 
 int main(int argc, char* argv[])
@@ -36,8 +43,10 @@ int main(int argc, char* argv[])
         ed.updateStatus();
         ed.printStatusLine();
         ed.printBuff();
+        redrawwin(win);
         int input = getch();
         ed.handleInput(input);
+        wrefresh(win);
     }
 
 
