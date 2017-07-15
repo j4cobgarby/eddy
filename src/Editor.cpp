@@ -96,7 +96,8 @@ void Editor::handleInput(int c) {
             break;
         case 127:
         case KEY_BACKSPACE:
-            if(x == 0 && y > 0) {
+            if (x == 0 && y == 0) break;
+            if (x == 0 && y > 0) {
                 x = buff->lines[y-1].length();
                 buff->lines[y-1] += buff->lines[y];
                 deleteLine();
