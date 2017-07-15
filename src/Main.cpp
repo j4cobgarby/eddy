@@ -8,7 +8,8 @@
 
 using namespace std;
 
-WINDOW * title;
+WINDOW * title_win;
+WINDOW * editor_win;
 
 void curses_init()
 {
@@ -16,9 +17,11 @@ void curses_init()
     noecho();
     raw();
     keypad(stdscr, true);
-    title = newwin(1, COLS, 0, 0);
-    wprintw(title, "jedit alpha");
-    wrefresh(title);
+    title_win = newwin(1, COLS, 0, 0);
+    wprintw(title_win, "jedit alpha");
+    wrefresh(title_win);
+
+    editor_win = newwin(LINES - 2, COLS, 1, 0);
 }
 
 int main(int argc, char* argv[])
@@ -42,9 +45,11 @@ int main(int argc, char* argv[])
     {
         ed.updateStatus();
         ed.printStatusLine();
-        ed.printBuff();
-        redrawwin(title);
-        wrefresh(title);
+        ed.printBuff(editor_win);
+        redrawwin(editor_win);
+        wrefresh(editor_win);
+        redrawwin(title_win);
+        wrefresh(title_win);
         int input = getch();
         ed.handleInput(input);
     }

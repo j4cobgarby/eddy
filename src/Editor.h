@@ -32,7 +32,7 @@ public:
     char getMode() {return mode;}
 
     void handleInput(int);
-    void printBuff();
+    void printBuff(WINDOW * win);
     void printStatusLine();
     void updateStatus();
 };

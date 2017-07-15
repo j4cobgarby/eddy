@@ -175,18 +175,18 @@ void Editor::moveDown() {
     move(y, x);
 }
 
-void Editor::printBuff() {
-    for(int i=0; i<LINES-1; i++) {
+void Editor::printBuff(WINDOW * win) {
+    for(int i=0; i<LINES-2; i++) {
         if(i >= buff->lines.size()) {
-            move(i, 0);
-            clrtoeol();
+            wmove(win, i, 0);
+            wclrtoeol(win);
         }
         else {
-            mvprintw(i, 0, buff->lines[i].c_str());
+            mvwprintw(win, i, 0, buff->lines[i].c_str());
         }
-        clrtoeol();
+        wclrtoeol(win);
     }
-    move(y, x);
+    wmove(win, y, x);
 }
 
 void Editor::printStatusLine() {
