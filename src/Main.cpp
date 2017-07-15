@@ -45,8 +45,8 @@ int main(int argc, char* argv[])
 
     while(ed.getMode() != 'x')
     {
-        ed.updateStatus();
-        ed.printStatusLine();
+        //ed.updateStatus();
+        //ed.printStatusLine();
         ed.printBuff(editor_win);
         redrawwin(editor_win);
         wrefresh(editor_win);
