@@ -8,7 +8,7 @@
 
 using namespace std;
 
-WINDOW * win;
+WINDOW * title;
 
 void curses_init()
 {
@@ -44,9 +44,9 @@ int main(int argc, char* argv[])
         ed.printStatusLine();
         ed.printBuff();
         redrawwin(title);
+        wrefresh(title);
         int input = getch();
         ed.handleInput(input);
-        wrefresh(title);
     }
 
 
