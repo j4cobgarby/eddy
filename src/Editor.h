@@ -13,30 +13,28 @@ private:
     Buffer* buff;
     string status, filename;
 
-    /* For those of you who do not have -std=c++11 in g++ */
     string tos(int);
 
-    // Cursor movement
     void moveUp();
     void moveDown();
     void moveLeft();
     void moveRight();
 
-    void deleteLine();                  // Deletes current line
-    void deleteLine(int);               // Deletes line <int>
+    void deleteLine();
+    void deleteLine(int);
 
-    void saveFile();                    // Saves buffer into the file
+    void saveFile();
 
 public:
-    Editor();                           // Normal constructor
-    Editor(string);                     // Constructor accepting filename
+    Editor();
+    Editor(string);
 
     char getMode() {return mode;}
 
-    void handleInput(int);              // Handles keyboard input
+    void handleInput(int);
     void printBuff();
-    void printStatusLine();             // Prints the status line (like vim!!!)
-    void updateStatus();                // Updates the status line (text, not display)
+    void printStatusLine();
+    void updateStatus();
 };
 
 #endif
