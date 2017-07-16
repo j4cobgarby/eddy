@@ -43,18 +43,20 @@ void curses_init()
 
     refresh();
 
-    showDialog("Welcome",
-        {
-            "Welcome to jedit alpha!",
-            "",
-            "Make sure you have your environment variable",
-            "ESCDELAY set to 0, for the best experience",
-            "with jedit.",
-            "To set it, type (in your shell):",
-            "",
-            "\texport ESCDELAY=0"
-        }
-        , 50);
+    string escdelay = getenv("ESCDELAY");
+
+    if (escdelay != "0") {
+        showDialog("Warning",
+            {
+                "Make sure you have your environment variable",
+                "ESCDELAY set to 0, for the best experience",
+                "with jedit.",
+                "To set it, type (in your shell):",
+                "",
+                "\texport ESCDELAY=0"
+            }
+            , 50);
+    }
 }
 
 int main(int argc, char* argv[])
