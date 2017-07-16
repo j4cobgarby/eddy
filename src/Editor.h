@@ -12,6 +12,7 @@ private:
     char mode;
     Buffer* buff;
     string status, filename;
+    bool isnewfile;
 
     string tos(int);
 

@@ -12,6 +12,7 @@ Editor::Editor() {
     mode = 'n';
     status = "Normal Mode";
     filename = "untitled";
+    isnewfile = true;
 
     buff = new Buffer();
     buff->appendLine("");
@@ -22,6 +23,7 @@ Editor::Editor(string fn) {
     mode = 'n';
     status = "Normal Mode";
     filename = fn;
+    isnewfile = false;
 
     buff = new Buffer();
 
@@ -86,6 +88,10 @@ void Editor::handleInput(int c) {
             mode = 'i';
             break;
         case 's':
+            if (isnewfile) {
+                filename = getDialogInput("Save", "Choose a file name", 9, 54);
+                isnewfile = false;
+            }
             saveFile();
             break;
         }
@@ -213,7 +219,7 @@ void Editor::deleteLine(int i) {
 
 void Editor::saveFile() {
     if (filename == "") {
-        filename = "jedit-untitled";
+        filename = "untitled";
     }
 
     ofstream f(filename.c_str());

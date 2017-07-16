@@ -40,8 +40,8 @@ string getDialogInput(string title, string prompt, int h, int w) {
         } else if ((d_c >= 32 && d_c <= 126) && input.length() + 1 <= max) { // 32 -> 126
             input += d_c;
         }
-        mvwprintw(dia, 6, 3, string(max, ' ').c_str());
-        mvwprintw(dia, 6, 3, input.c_str());
+        mvwprintw(dia, 5, 3, string(max, ' ').c_str());
+        mvwprintw(dia, 5, 3, input.c_str());
         wrefresh(dia);
         redrawwin(dia);
     }
