@@ -9,7 +9,7 @@ void showDialog(string title, vector<string> body, int w) {
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     mvwprintw(dia, 1, (w - title.length()) / 2, title.c_str());
-    //mvwprintw(dia, 3, 2, body.c_str());
+
     int i = 0;
     for (auto const& ln: body) { i++;
         mvwprintw(dia, 2 + i, 3, ln.c_str());
