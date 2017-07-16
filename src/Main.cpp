@@ -42,6 +42,8 @@ void curses_init()
     wbkgd(stat_win, COLOR_PAIR(1));
 
     refresh();
+
+    showDialog("Welcome", "Welcome to jedit alpha!", 7, 30);
 }
 
 int main(int argc, char* argv[])
