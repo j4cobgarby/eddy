@@ -51,7 +51,7 @@ void Editor::updateStatus() {
         status += "<EXITING...>";
         break;
     }
-    status += "\tCOL " + tos(x) + "\tROW" + tos(y) + "\tEDITING: " + filename;
+    status += "\tCOL " + tos(x) + "\tLINE " + tos(y) + "\tEDITING: " + filename;
 }
 
 string Editor::tos(int i) {
@@ -89,22 +89,31 @@ void Editor::handleInput(int c) {
             break;
         case 't':
             int h = 14, w = 46;
+            int max = 40;
+            string input;
+
             WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
-            mvwprintw(dia, h-2, 2, "Press [ENTER] to continue");
+            mvwprintw(dia, h-2, 2, "[ENTER]\t[ESC]");
             wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
             mvwprintw(dia, 1, 2, "Dialog test");
             mvwprintw(dia, 4, 2, "Type something");
-            wmove(dia, 6, 4);
 
             wrefresh(dia);
             redrawwin(dia);
-            char d_c;
+            int d_c;
             while (((d_c = getch()) != KEY_ENTER) && d_c != 10) {
-                waddch(dia, d_c);
+                if ((d_c == KEY_BACKSPACE || d_c == 127) && input.length() > 0) {
+                    input.pop_back();
+                } else if ((d_c >= 32 && d_c <= 126) && input.length() + 1 <= max) { // 32 -> 126
+                    input += d_c;
+                }
+                mvwprintw(dia, 6, 3, string(max, ' ').c_str());
+                mvwprintw(dia, 6, 3, input.c_str());
                 wrefresh(dia);
                 redrawwin(dia);
             }
+            delwin(dia);
             break;
         }
         break;

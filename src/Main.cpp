@@ -19,7 +19,7 @@ void curses_init()
     initscr();
     start_color();
     noecho();
-    raw();
+    cbreak();
     keypad(stdscr, true);
 
     init_pair(1, COLOR_BLACK, COLOR_WHITE); // black on white
