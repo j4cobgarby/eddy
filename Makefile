@@ -8,7 +8,7 @@ OBJDIR := obj
 
 SRC := $(wildcard $(SRCDIR)/*.cpp)
 OBJ := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
-EXE := dist/jedit
+EXE := jedit
 
 .PHONY: all clean
 

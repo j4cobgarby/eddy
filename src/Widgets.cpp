@@ -25,7 +25,7 @@ void showDialog(string title, vector<string> body, int w) {
 }
 
 string getDialogInput(string title, vector<string> body, int w) {
-    int max = w - 8;
+    int max = w - 6;
     int h = 9 + body.size();
     string input;
 
@@ -39,7 +39,7 @@ string getDialogInput(string title, vector<string> body, int w) {
         mvwprintw(dia, 3 + i, 3, ln.c_str());
     }
     wattron(dia, A_REVERSE);
-    mvwprintw(dia, 5 + body.size(), 3, string(max + 2, ' ').c_str());
+    mvwprintw(dia, 5 + body.size(), 3, string(max, ' ').c_str());
     wattroff(dia, A_REVERSE);
 
     wrefresh(dia);
@@ -52,8 +52,8 @@ string getDialogInput(string title, vector<string> body, int w) {
             input += d_c;
         }
         wattron(dia, A_REVERSE);
-        mvwprintw(dia, 5 + body.size(), 3, string(max + 2, ' ').c_str());
-        mvwprintw(dia, 5 + body.size(), 4, input.c_str());
+        mvwprintw(dia, 5 + body.size(), 3, string(max, ' ').c_str());
+        mvwprintw(dia, 5 + body.size(), 3, input.c_str());
         wattroff(dia, A_REVERSE);
         wrefresh(dia);
         redrawwin(dia);
