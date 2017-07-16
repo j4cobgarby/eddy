@@ -33,7 +33,7 @@ public:
 
     void handleInput(int);
     void printBuff(WINDOW * win);
-    void printStatusLine();
+    void printStatusLine(WINDOW * win);
     void updateStatus();
 };
 

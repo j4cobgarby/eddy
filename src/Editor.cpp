@@ -190,11 +190,9 @@ void Editor::printBuff(WINDOW * win) {
     move(y+1, x);
 }
 
-void Editor::printStatusLine() {
-    attron(A_REVERSE);
-    mvprintw(LINES-1, 0, status.c_str());
-    clrtoeol();
-    attroff(A_REVERSE);
+void Editor::printStatusLine(WINDOW * win) {
+    mvwprintw(win, 0, 0, status.c_str());
+    wclrtoeol(win);
 }
 
 void Editor::deleteLine() {

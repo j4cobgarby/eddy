@@ -10,6 +10,7 @@ using namespace std;
 
 WINDOW * title_win;
 WINDOW * editor_win;
+WINDOW * stat_win;
 
 void curses_init()
 {
@@ -23,16 +24,18 @@ void curses_init()
 
     title_win = newwin(1, COLS, 0, 0);
     wbkgd(title_win, COLOR_PAIR(1));
-    wprintw(title_win, "jedit alpha, written by j4cobgarby");
+    wprintw(title_win, "jedit\t");
     wclrtoeol(title_win);
     wrefresh(title_win);
 
-    editor_win = newwin(LINES - 1, COLS, 1, 0);
+    editor_win = newwin(LINES - 2, COLS, 1, 0);
+    stat_win = newwin(1, COLS, LINES-1, 0);
 
     redrawwin(editor_win);
-    wrefresh(editor_win);
     redrawwin(title_win);
-    wrefresh(title_win);
+
+    wbkgd(stat_win, COLOR_PAIR(1));
+
     refresh();
 }
 
@@ -55,13 +58,15 @@ int main(int argc, char* argv[])
 
     while(ed.getMode() != 'x')
     {
-        //ed.updateStatus();
-        //ed.printStatusLine();
+        ed.updateStatus();
+        ed.printStatusLine(stat_win);
         ed.printBuff(editor_win);
-        redrawwin(editor_win);
         wrefresh(editor_win);
-        redrawwin(title_win);
+        wrefresh(stat_win);
         wrefresh(title_win);
+        redrawwin(editor_win);
+        redrawwin(title_win);
+        redrawwin(stat_win);
         int input = getch();
         ed.handleInput(input);
     }
