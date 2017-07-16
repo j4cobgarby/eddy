@@ -87,6 +87,21 @@ void Editor::handleInput(int c) {
         case 's':
             saveFile();
             break;
+        case 't':
+            int h = 14, w = 46;
+            WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
+            mvwprintw(dia, h-2, 2, "Press [x] to continue");
+            wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
+
+            mvwprintw(dia, 1, 2, "Dialog test");
+
+            wrefresh(dia);
+            redrawwin(dia);
+            char d_c;
+            while ((d_c = getch()) != 'x') {
+
+            }
+            break;
         }
         break;
     case 'i':
