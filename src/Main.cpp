@@ -61,9 +61,6 @@ int main(int argc, char* argv[])
 
     curses_init();
 
-    string typed = getDialogInput("Title", "type something below");
-    showDialog(typed, "The body of the dialog");
-
     while(ed.getMode() != 'x')
     {
         ed.updateStatus();

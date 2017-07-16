@@ -88,9 +88,6 @@ void Editor::handleInput(int c) {
         case 's':
             saveFile();
             break;
-        case 't':
-            showDialog("'t' pressed", "");
-            break;
         }
         break;
     case 'i':

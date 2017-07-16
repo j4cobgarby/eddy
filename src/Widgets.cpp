@@ -1,7 +1,6 @@
 #include "Widgets.h"
 
-void showDialog(string title, string body) {
-    int h = 14, w = 46;
+void showDialog(string title, string body, int h, int w) {
     int max = 40;
     string input;
 
@@ -10,7 +9,7 @@ void showDialog(string title, string body) {
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     mvwprintw(dia, 1, 2, title.c_str());
-    mvwprintw(dia, 4, 2, body.c_str());
+    mvwprintw(dia, 3, 2, body.c_str());
 
     wrefresh(dia);
     redrawwin(dia);
@@ -21,8 +20,7 @@ void showDialog(string title, string body) {
     return;
 }
 
-string getDialogInput(string title, string prompt) {
-    int h = 14, w = 46;
+string getDialogInput(string title, string prompt, int h, int w) {
     int max = 40;
     string input;
 
@@ -31,7 +29,7 @@ string getDialogInput(string title, string prompt) {
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     mvwprintw(dia, 1, 2, title.c_str());
-    mvwprintw(dia, 4, 2, prompt.c_str());
+    mvwprintw(dia, 3, 2, prompt.c_str());
 
     wrefresh(dia);
     redrawwin(dia);
