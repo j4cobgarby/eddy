@@ -1,7 +1,8 @@
 #include "Widgets.h"
 
-void showDialog(string title, vector<string> body, int h, int w) {
+void showDialog(string title, vector<string> body, int w) {
     string input;
+    int h = 6 + body.size();
 
     WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
     mvwprintw(dia, h-2, 2, "[ENTER] to continue");
@@ -11,7 +12,7 @@ void showDialog(string title, vector<string> body, int h, int w) {
     //mvwprintw(dia, 3, 2, body.c_str());
     int i = 0;
     for (auto const& ln: body) { i++;
-        mvwprintw(dia, 3+i, 3, ln.c_str());
+        mvwprintw(dia, 2+i, 3, ln.c_str());
     }
 
     wrefresh(dia);
@@ -23,8 +24,9 @@ void showDialog(string title, vector<string> body, int h, int w) {
     return;
 }
 
-string getDialogInput(string title, string prompt, int h, int w) {
+string getDialogInput(string title, vector<string> body, int w) {
     int max = w - 4;
+    int h = 9 + body.size();
     string input;
 
     WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
@@ -32,7 +34,10 @@ string getDialogInput(string title, string prompt, int h, int w) {
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     mvwprintw(dia, 1, 2, title.c_str());
-    mvwprintw(dia, 3, 2, prompt.c_str());
+    int i = 0;
+    for (auto const& ln: body) { i++;
+        mvwprintw(dia, 3+i, 3, ln.c_str());
+    }
 
     wrefresh(dia);
     redrawwin(dia);

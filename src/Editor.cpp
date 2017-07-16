@@ -89,7 +89,7 @@ void Editor::handleInput(int c) {
             break;
         case 's':
             if (isnewfile) {
-                filename = getDialogInput("Save", "Choose a file name", 9, 54);
+                filename = getDialogInput("Save", {"Choose a file name"}, 54);
                 isnewfile = false;
             }
             saveFile();

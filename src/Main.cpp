@@ -45,15 +45,16 @@ void curses_init()
 
     showDialog("Welcome",
         {
-            "Welcome to jedit alpha",
+            "Welcome to jedit alpha!",
             "",
             "Make sure you have your environment variable",
-            "'ESCDELAY' set to 0, for the best experience",
+            "ESCDELAY set to 0, for the best experience",
             "with jedit.",
             "To set it, type (in your shell):",
-            " export ESCDELAY=0"
+            "",
+            "\texport ESCDELAY=0"
         }
-        , 14, 50);
+        , 50);
 }
 
 int main(int argc, char* argv[])

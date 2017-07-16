@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void showDialog(string title, vector<string> body, int h, int w);
-string getDialogInput(string, string, int, int);
+void   showDialog     (string, vector<string>, int);
+string getDialogInput (string, vector<string>, int);
 
 #endif
