@@ -14,11 +14,15 @@ WINDOW * editor_win;
 void curses_init()
 {
     initscr();
+    start_color();
     noecho();
     raw();
     keypad(stdscr, true);
+
+    init_pair(1, COLOR_BLACK, COLOR_WHITE);
+
     title_win = newwin(1, COLS, 0, 0);
-    wattron(title_win, A_REVERSE);
+    wbkgd(title_win, COLOR_PAIR(1));
     wprintw(title_win, "jedit alpha, written by j4cobgarby");
     wclrtoeol(title_win);
     wrefresh(title_win);
