@@ -1,15 +1,18 @@
 #include "Widgets.h"
 
-void showDialog(string title, string body, int h, int w) {
-    int max = 40;
+void showDialog(string title, vector<string> body, int h, int w) {
     string input;
 
     WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
     mvwprintw(dia, h-2, 2, "[ENTER] to continue");
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
-    mvwprintw(dia, 1, 2, title.c_str());
-    mvwprintw(dia, 3, 2, body.c_str());
+    mvwprintw(dia, 1, (w - title.length()) / 2, title.c_str());
+    //mvwprintw(dia, 3, 2, body.c_str());
+    int i = 0;
+    for (auto const& ln: body) { i++;
+        mvwprintw(dia, 3+i, 2, ln.c_str());
+    }
 
     wrefresh(dia);
     redrawwin(dia);
@@ -21,7 +24,7 @@ void showDialog(string title, string body, int h, int w) {
 }
 
 string getDialogInput(string title, string prompt, int h, int w) {
-    int max = 40;
+    int max = w - 4;
     string input;
 
     WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
@@ -37,7 +40,7 @@ string getDialogInput(string title, string prompt, int h, int w) {
     while (((d_c = getch()) != KEY_ENTER) && d_c != 10) {
         if ((d_c == KEY_BACKSPACE || d_c == 127) && input.length() > 0) {
             input.pop_back();
-        } else if ((d_c >= 32 && d_c <= 126) && input.length() + 1 <= max) { // 32 -> 126
+        } else if ((d_c >= 32 && d_c <= 126) && input.length() + 1 <= max) {
             input += d_c;
         }
         mvwprintw(dia, 5, 3, string(max, ' ').c_str());

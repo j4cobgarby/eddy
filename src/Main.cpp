@@ -43,7 +43,7 @@ void curses_init()
 
     refresh();
 
-    showDialog("Welcome", "Welcome to jedit alpha!", 7, 30);
+    showDialog("Welcome", {"Welcome to jedit alpha", "Line2"}, 9, 30);
 }
 
 int main(int argc, char* argv[])

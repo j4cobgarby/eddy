@@ -3,10 +3,11 @@
 
 #include <ncurses.h>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-void showDialog(string, string, int, int);
+void showDialog(string title, vector<string> body, int h, int w);
 string getDialogInput(string, string, int, int);
 
 #endif
