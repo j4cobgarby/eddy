@@ -5,7 +5,7 @@ void showDialog(string title, string body, int h, int w) {
     string input;
 
     WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
-    mvwprintw(dia, h-2, 2, "[ENTER]\t[ESC]");
+    mvwprintw(dia, h-2, 2, "[ENTER] to submit");
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     mvwprintw(dia, 1, 2, title.c_str());
@@ -25,7 +25,7 @@ string getDialogInput(string title, string prompt, int h, int w) {
     string input;
 
     WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
-    mvwprintw(dia, h-2, 2, "[ENTER]\t[ESC]");
+    mvwprintw(dia, h-2, 2, "[ENTER] to submit");
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     mvwprintw(dia, 1, 2, title.c_str());
