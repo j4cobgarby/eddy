@@ -2,8 +2,11 @@
 #define WIDGETS_H
 
 #include <ncurses.h>
+#include <string>
 
-void showDialog(string);
-string getDialogInput(string);
+using namespace std;
+
+void showDialog(string, string);
+string getDialogInput(string, string);
 
 #endif

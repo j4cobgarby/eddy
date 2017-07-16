@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include "Editor.h"
+#include "Widgets.h"
 
 using namespace std;
 
@@ -59,6 +60,9 @@ int main(int argc, char* argv[])
     }
 
     curses_init();
+
+    string typed = getDialogInput("Title", "type something below");
+    showDialog(typed, "The body of the dialog");
 
     while(ed.getMode() != 'x')
     {
