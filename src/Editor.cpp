@@ -89,7 +89,12 @@ void Editor::handleInput(int c) {
             break;
         case 's':
             if (isnewfile) {
-                filename = getDialogInput("Save", {"Choose a file name"}, 54);
+                filename = getDialogInput("Save", {
+                    "Currently, this file is unnamed. To",
+                    "save your hard work, you need to give",
+                    "it a name!",
+                    "Type the new name below!"
+                }, 54);
                 isnewfile = false;
             }
             saveFile();
