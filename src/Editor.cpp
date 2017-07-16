@@ -90,7 +90,7 @@ void Editor::handleInput(int c) {
         case 't':
             int h = 14, w = 46;
             WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
-            mvwprintw(dia, h-2, 2, "Press [x] to continue");
+            mvwprintw(dia, h-2, 2, "Press [ENTER] to continue");
             wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
             mvwprintw(dia, 1, 2, "Dialog test");
@@ -137,7 +137,7 @@ void Editor::handleInput(int c) {
             break;
         case KEY_ENTER:
         case 10:
-            if (y > LINES - 1) break;
+            if (y > LINES - 4) return;
             if(x < buff->lines[y].length()) {
                 buff->insertLine(buff->lines[y].substr(x, buff->lines[y].length() - x), y + 1);
                 buff->lines[y].erase(x, buff->lines[y].length() - x);
@@ -188,7 +188,7 @@ void Editor::moveUp() {
 }
 
 void Editor::moveDown() {
-    if(y+1 < LINES-1 && y+1 < buff->lines.size())
+    if(y+1 < LINES && y+1 < buff->lines.size())
         y++;
     if(x >= buff->lines[y].length())
         x = buff->lines[y].length();

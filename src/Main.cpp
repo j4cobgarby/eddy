@@ -83,28 +83,3 @@ int main(int argc, char* argv[])
     endwin();
     return 0;
 }
-
-void escdelay_dialog() {
-    int h = 14, w = 46;
-    WINDOW * dia = newwin(h, w, (LINES / 2) - (h / 2), (COLS / 2) - (w / 2));
-    mvwprintw(dia, h-2, 2, "Press [ENTER] to continue");
-    wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
-
-    string title = "INFO";
-    string ln1 = "jedit has detected that your env";
-    string ln2 = "variable 'ESCDELAY' is not 0. For";
-    string ln3 = "the best experience with this program";
-    string ln4 = "please type:";
-    string ln5 = " $ export ESCDELAY=0";
-    string lns[7] = {title, "", ln1, ln2, ln3, ln4, ln5};
-
-    for (int i = 0; i < sizeof(lns); i++) {
-        mvwprintw(dia, i+2, (w/2)-(lns[i].length()/2), lns[i].c_str());
-    }
-
-    wrefresh(dia);
-    redrawwin(dia);
-    char d_c;
-    while (((d_c = getch()) != KEY_ENTER) && d_c != 10) {
-    }
-}
