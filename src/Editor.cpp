@@ -93,7 +93,7 @@ void Editor::handleInput(int c) {
                     "Currently, this file is unnamed. To",
                     "save your hard work, you need to give",
                     "it a name!",
-                    "Type the new name below!"
+                    "Type the name (or path) below"
                 }, 54);
                 isnewfile = false;
             }
