@@ -20,7 +20,9 @@ void curses_init()
     raw();
     keypad(stdscr, true);
 
-    init_pair(1, COLOR_BLACK, COLOR_WHITE);
+    init_pair(1, COLOR_BLACK, COLOR_WHITE); // black on white
+    init_pair(2, COLOR_WHITE, COLOR_BLUE); // insert
+    init_pair(3, COLOR_BLUE, COLOR_WHITE); // normal
 
     title_win = newwin(1, COLS, 0, 0);
     wbkgd(title_win, COLOR_PAIR(1));
@@ -61,12 +63,15 @@ int main(int argc, char* argv[])
         ed.updateStatus();
         ed.printStatusLine(stat_win);
         ed.printBuff(editor_win);
+
         wrefresh(editor_win);
         wrefresh(stat_win);
         wrefresh(title_win);
+
         redrawwin(editor_win);
         redrawwin(title_win);
         redrawwin(stat_win);
+
         int input = getch();
         ed.handleInput(input);
     }

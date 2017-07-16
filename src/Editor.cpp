@@ -191,6 +191,13 @@ void Editor::printBuff(WINDOW * win) {
 }
 
 void Editor::printStatusLine(WINDOW * win) {
+    if (mode == 'n') {
+        wbkgd(win, COLOR_PAIR(3));
+    } else if (mode == 'i') {
+        wbkgd(win, COLOR_PAIR(2));
+    } else {
+        wbkgd(win, COLOR_PAIR(1));
+    }
     mvwprintw(win, 0, 0, status.c_str());
     wclrtoeol(win);
 }
