@@ -94,12 +94,16 @@ void Editor::handleInput(int c) {
             wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
             mvwprintw(dia, 1, 2, "Dialog test");
+            mvwprintw(dia, 4, 2, "Type something");
+            wmove(dia, 6, 4);
 
             wrefresh(dia);
             redrawwin(dia);
             char d_c;
-            while ((d_c = getch()) != 'x') {
-
+            while (((d_c = getch()) != KEY_ENTER) && d_c != 10) {
+                waddch(dia, d_c);
+                wrefresh(dia);
+                redrawwin(dia);
             }
             break;
         }
