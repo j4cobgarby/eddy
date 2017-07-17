@@ -76,7 +76,7 @@ string getDialogInput(string title, vector<string> body, int w) {
         else if ((d_c >= 32 && d_c <= 126) && input.length() + 1 <= max) {
             input += d_c;
 
-            if (input.length() - scroll_amount > input_width) scroll_amount += 4;
+            if (input.length() - scroll_amount > input_width) scroll_amount += 5;
         }
 
         else if (d_c == KEY_LEFT && scroll_amount > 0) {
