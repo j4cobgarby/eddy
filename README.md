@@ -1,7 +1,5 @@
 ![](demo.gif)
 
-Pronounced as it's spelled (**not** as jay-edit, etc.)
-
 ## Getting Started (development)
 
 Want to develop or test jedit? Follow these instructions to do so!
