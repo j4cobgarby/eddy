@@ -127,6 +127,7 @@ string getDialogInput(string title, vector<string> body, int width) {
 vector<string> getFindReplaceFields() {
     string find_input = "";
     string replace_input = "";
+    int selected_field = 0; // 0=find, 1=replace, other=replace
     int max = 256;
     int scroll_amount = 0;
 
