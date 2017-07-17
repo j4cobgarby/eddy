@@ -119,6 +119,30 @@ jedit path/to/file
 
 *Note at the moment, file paths can't include spaces. This is a known issue.*
 
+### Creating new files
+
+You can create a new file the same way you'd open one which already exists. Suppose you want to create a file called `new_file.txt`, you could do this
+
+```
+jedit new_file.txt
+```
+
+And then, once it's loaded, press `s` to create it.
+
+Alternatively you could rely on your operating system's commands
+
+```
+touch new_file.txt
+jedit new_file.txt
+```
+
+or something like that. If that doesn't work, you could always do
+
+```
+echo> new_file.txt
+jedit new_file.txt
+```
+
 ## Authors
 
 * **Jacob Garby** - *Initial development* - [j4cobgarby](https://github.com/j4cobgarby)
