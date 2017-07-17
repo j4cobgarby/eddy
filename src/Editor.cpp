@@ -12,7 +12,7 @@ Editor::Editor() {
     scrolly = 0;
     scrollx = 0;
     mode = 'n';
-    status = "Normal Mode";
+    status = "";
     filename = "untitled";
     isnewfile = true;
 
@@ -25,7 +25,7 @@ Editor::Editor(string fn) {
     scrolly = 0;
     scrollx = 0;
     mode = 'n';
-    status = "Normal Mode";
+    status = "";
     filename = fn;
     isnewfile = false;
 
