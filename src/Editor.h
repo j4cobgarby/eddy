@@ -8,24 +8,27 @@
 class Editor
 {
 private:
-    int x, y;
-    int scrollamount;
-    char mode;
-    bool isnewfile;
+    int     x, y;
+    int     scrolly;
+    int     scrollx;
+    char    mode;
+    bool    isnewfile;
+
     Buffer* buff;
-    string status, filename;
 
-    string tos(int);
+    string  status, filename;
 
-    void moveUp();
-    void moveDown();
-    void moveLeft();
-    void moveRight();
+    string  tos(int);
 
-    void deleteLine();
-    void deleteLine(int);
+    void    moveUp();
+    void    moveDown();
+    void    moveLeft();
+    void    moveRight();
 
-    void saveFile();
+    void    deleteLine();
+    void    deleteLine(int);
+
+    void    saveFile();
 
 public:
     Editor();
