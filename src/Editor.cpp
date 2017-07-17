@@ -58,13 +58,7 @@ void Editor::updateStatus() {
         status += "<EXITING...>";
         break;
     }
-    status += "\t" + tos(y + 1 + scrolly) + ":" + tos(x + 1) + "\t" + filename;
-}
-
-string Editor::tos(int i) {
-    stringstream ss;
-    ss << i;
-    return ss.str();
+    status += "\t" + to_string(y + 1 + scrolly) + ":" + to_string(x + 1) + "\t" + filename;
 }
 
 void Editor::handleInput(int c) {
