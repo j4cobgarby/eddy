@@ -201,6 +201,10 @@ void Editor::scrollDown(int amount) {
 }
 
 void Editor::moveUp() {
+    if (y < 4 && scrolly > 0) {
+        scrollUp();
+        return;
+    }
     if(y+scrolly-1 >= 0)
         y--;
     if(x >= buff->lines[y].length())
