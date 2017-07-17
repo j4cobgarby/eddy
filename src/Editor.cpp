@@ -114,6 +114,7 @@ void Editor::handleInput(int c) {
             string find_field = fields.at(0);
             string replace_field = fields.at(1);
             doFindReplace(find_field, replace_field);
+            x = 0;
         }
         break;
     case 'i':
