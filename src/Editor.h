@@ -26,6 +26,9 @@ private:
     void    scrollDown();
     void    scrollUp();
 
+    void    scrollDown(int);
+    void    scrollUp(int);
+
     void    deleteLine();
     void    deleteLine(int);
 

@@ -85,6 +85,12 @@ void Editor::handleInput(int c) {
         case '[':
             scrollUp();
             break;
+        case '}':
+            scrollDown(10);
+            break;
+        case '{':
+            scrollUp(10);
+            break;
         case 'x':
             mode = 'x';
             break;
@@ -183,6 +189,15 @@ void Editor::scrollUp() {
 
 void Editor::scrollDown() {
     scrolly++;
+}
+
+void Editor::scrollUp(int amount) {
+    scrolly -= amount;
+    if (scrolly < 0) scrolly = 0;
+}
+
+void Editor::scrollDown(int amount) {
+    scrolly += amount;
 }
 
 void Editor::moveUp() {
