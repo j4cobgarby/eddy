@@ -58,7 +58,7 @@ void Editor::updateStatus() {
         status += "<EXITING...>";
         break;
     }
-    status += "\t" + tos(y) + ":" + tos(x) + "\t" + filename;
+    status += "\t" + tos(y + 1 + scrolly) + ":" + tos(x + 1) + "\t" + filename;
 }
 
 string Editor::tos(int i) {
