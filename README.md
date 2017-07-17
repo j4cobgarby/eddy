@@ -1,4 +1,4 @@
-![](screenshot1.png)
+![](demo.gif)
 
 # jedit
 
