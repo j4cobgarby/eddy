@@ -97,9 +97,9 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 |`s`|Saves the current file|If you're not editing a file and instead writing a new file from scratch, jedit will open a dialog box asking for you to name your new file.|
 |`i`|Enters insert mode.||
 |`[`|Scroll up by one character.|You can of course scroll normally by getting near to the bottom or top of the viewport using the arrow keys.|
-|']'|Scroll down by one character.|See above.|
-|'{'|Scroll up by 10 characters.||
-|'}'|Scroll down by 10 characters.||
+|`]`|Scroll down by one character.|See above.|
+|`{`|Scroll up by 10 characters.||
+|`}`|Scroll down by 10 characters.||
 
 ### Opening files
 
