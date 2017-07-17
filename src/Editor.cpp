@@ -85,6 +85,12 @@ void Editor::handleInput(int c) {
     switch(mode) {
     case 'n':
         switch(c) {
+        case ']':
+            scrollDown();
+            break;
+        case '[':
+            scrollUp();
+            break;
         case 'x':
             mode = 'x';
             break;
@@ -176,6 +182,15 @@ void Editor::moveRight() {
     }
 }
 
+void Editor::scrollUp() {
+    scrolly--;
+    if (scrolly < 0) scrolly = 0;
+}
+
+void Editor::scrollDown() {
+    scrolly++;
+}
+
 void Editor::moveUp() {
     if(y-1 >= 0)
         y--;
@@ -196,17 +211,15 @@ void Editor::printBuff(WINDOW * win) {
     // Iterate lines of the editor
     for(int i=0; i<LINES-2; i++) {
         if(i >= buff->lines.size()) {
-            //move(i, 0);
-            //wprintw(win, "outside");
-            //wclrtoeol(win);
+            move(i, 0);
+            wclrtoeol(win);
         }
         else {
             try {
                 mvwprintw(win, i, 0, (buff->lines.at(i + scrolly)).c_str());
             } catch (const out_of_range &oor) {
-
+                // this is expected
             }
-            //mvwprintw(win, i, 0, tos(i+4).c_str());
         }
         wclrtoeol(win);
     }
