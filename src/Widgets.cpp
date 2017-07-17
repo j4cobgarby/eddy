@@ -45,7 +45,7 @@ string getDialogInput(string title, vector<string> body, int w) {
      */
     int max = 128;
     int input_width = w - 6;
-    int height = 9 + body.size();
+    int height = 8 + body.size();
     int scroll_amount = 0;
 
     string input;
@@ -62,11 +62,11 @@ string getDialogInput(string title, vector<string> body, int w) {
     // iterate body vector and print each line in it
     int i = 0;
     for (auto const& ln: body) { i++;
-        mvwprintw(dia, 3 + i, 3, ln.c_str());
+        mvwprintw(dia, 2 + i, 3, ln.c_str());
     }
     // initial display of field
     wattron(dia, A_REVERSE);
-    mvwprintw(dia, 5 + body.size(), 3, string(input_width, ' ').c_str());
+    mvwprintw(dia, 4 + body.size(), 3, string(input_width, ' ').c_str());
     wattroff(dia, A_REVERSE);
 
     wrefresh(dia);
@@ -106,13 +106,13 @@ string getDialogInput(string title, vector<string> body, int w) {
         wattron(dia, A_REVERSE);
 
         // Draw input box
-        mvwprintw(dia, 5 + body.size(), 3, string(input_width, ' ').c_str());
+        mvwprintw(dia, 4 + body.size(), 3, string(input_width, ' ').c_str());
 
         if (scroll_amount > input.length()) scroll_amount = input.length();
         if (scroll_amount < 0) scroll_amount = 0;
 
         // Draw text buffer
-        mvwprintw(dia, 5 + body.size(), 3, input.substr(scroll_amount, input_width).c_str());
+        mvwprintw(dia, 4 + body.size(), 3, input.substr(scroll_amount, input_width).c_str());
 
         // White on black
         wattroff(dia, A_REVERSE);
