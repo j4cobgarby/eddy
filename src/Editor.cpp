@@ -213,7 +213,7 @@ void Editor::moveUp() {
 }
 
 void Editor::moveDown() {
-    if (y > LINES-4) {
+    if (y > LINES-(3 + 4)) {
         scrollDown();
         return;
     }
