@@ -27,5 +27,4 @@
                \ @  @ /
                 \    /
                  \  /
-                  \/ jedit alpha
-                     by j4cobgarby
+                  \/
