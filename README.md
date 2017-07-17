@@ -2,7 +2,7 @@
 
 Pronounced as it's spelled (**not** as jay-edit, etc.)
 
-## Getting Started
+## Getting Started (development)
 
 Want to develop or test jedit? Follow these instructions to do so!
 
@@ -38,7 +38,7 @@ a way of opening up an ubuntu shell in Windows! You can find out more about that
 
 Once you've got the bash shell up and running, you can follow the steps for debian
 
-### Installing
+### Installing for development
 
 Now you're ready to get the development environment set up!
 
@@ -83,6 +83,41 @@ Now you can simply run it
  2. Create a new branch for your new feature
  3. Develop this branch - comment (briefly or in detail) how it all works
  4. Push your fork
+ 
+## How to use
+
+Similar to vim, jedit has different modes for editing files. jedit has two modes:
+
+ - `NORMAL`
+ - `INSERT`
+
+### NORMAL mode
+
+When you open up jedit, you'll be in `NORMAL`. This is the mode in which you can make use of jedit's
+different commands. To switch from `NORMAL` to `INSERT`, simply press `i`.
+
+### INSERT mode
+
+Once you're in `INSERT`, you can start writing text in the file. You may enter text just as in any
+other editor. When you want to go back into `NORMAL`, press `escape`.
+
+### NORMAL mode commands
+
+|Key|Action|Notes|
+|---|---|---|
+|`q`|Quits jedit|Doesn't prompt to save. Make sure you've already saved if you want to keep what you've done.|
+|`s`|Saves the current file|If you're not editing a file and instead writing a new file from scratch, jedit will open a dialog box asking for you to name your new file.|
+|`i`|Enters insert mode.||
+
+### Opening files
+
+To open a file in jedit, you must do so when you run the program. The file name is specified as a command line argument.
+
+```
+jedit path/to/file
+```
+
+*Note at the moment, file paths can't include spaces. This is a known issue.*
 
 ## Authors
 
