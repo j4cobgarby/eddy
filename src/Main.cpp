@@ -62,25 +62,16 @@ void curses_init()
     // update text
     refresh();
 
-    // get value of environment variable escdelay
-    // this program works better if it's '0'
-    string escdelay = getenv("ESCDELAY");
-
-    // if ESCDELAY isn't 0, make a dialog box telling the user
-    // to make it 0. however, they don't have to if they don't
-    // want to.
-    if (escdelay != "0") {
-        showDialog("Warning",
-            {
-                "Make sure you have your environment variable",
-                "ESCDELAY set to 0, for the best experience",
-                "with jedit.",
-                "To set it, type (in your shell):",
-                "",
-                "\texport ESCDELAY=0"
-            }
-            , 50);
-    }
+    // Splash dialog
+    showDialog("jedit v0.4-beta", {
+        "Hello! Welcome to jedit v0.4b!",
+        "",
+        "Keep in mind it's in beta, so",
+        "you should expect issues. If",
+        "you do encounter any, it would",
+        "really help to report them on",
+        "the Github repository."
+    }, 36);
 }
 
 int main(int argc, char* argv[])
