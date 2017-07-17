@@ -176,7 +176,7 @@ void Editor::moveLeft() {
 }
 
 void Editor::moveRight() {
-    if(x+1 < COLS && x+1 <= buff->lines[y].length()) {
+    if(x+1 < COLS && x+1 <= buff->lines[y+scrolly].length()) {
         x++;
         move(y, x);
     }
@@ -201,7 +201,7 @@ void Editor::scrollDown(int amount) {
 }
 
 void Editor::moveUp() {
-    if(y-1 >= 0)
+    if(y+scrolly-1 >= 0)
         y--;
     if(x >= buff->lines[y].length())
         x = buff->lines[y].length();
@@ -209,7 +209,7 @@ void Editor::moveUp() {
 }
 
 void Editor::moveDown() {
-    if(y+1 < LINES && y+1 < buff->lines.size())
+    if(y+scrolly+1 < LINES && y+scrolly+1 < buff->lines.size())
         y++;
     if(x >= buff->lines[y].length())
         x = buff->lines[y].length();
