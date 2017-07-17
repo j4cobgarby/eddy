@@ -193,7 +193,8 @@ void Editor::moveDown() {
 }
 
 void Editor::printBuff(WINDOW * win) {
-    for(int i=0; i<LINES-1; i++) {
+    // Iterate lines of the editor
+    for(int i=0; i<LINES-2; i++) {
         if(i >= buff->lines.size()) {
             move(i, 0);
             wclrtoeol(win);
