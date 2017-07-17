@@ -30,8 +30,8 @@ to install the neccessary packages. They are probably named identically regardle
 
 #### Windows
 
-The best way to get started on Windows is by installing the Windows subsystem for Linux. Basically this is 
-a way of opening up an ubuntu shell in Windows! You can find out more about that 
+The best way to get started on Windows is by installing the Windows subsystem for Linux. Basically this is
+a way of opening up an ubuntu shell in Windows! You can find out more about that
 [here](https://msdn.microsoft.com/en-gb/commandline/wsl/install_guide), but
 
 > Your PC must be running a 64-bit version of Windows 10 Anniversary Update or later (build 1607+).
@@ -71,7 +71,7 @@ Now you can simply run it
  2. Create a new branch for your new feature
  3. Develop this branch - comment (briefly or in detail) how it all works
  4. Push your fork
- 
+
 ## How to use
 
 Similar to vim, jedit has different modes for editing files. jedit has two modes:
@@ -96,6 +96,10 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 |`x`|Quits jedit|Doesn't prompt to save. Make sure you've already saved if you want to keep what you've done.|
 |`s`|Saves the current file|If you're not editing a file and instead writing a new file from scratch, jedit will open a dialog box asking for you to name your new file.|
 |`i`|Enters insert mode.||
+|`[`|Scroll up by one character.|You can of course scroll normally by getting near to the bottom or top of the viewport using the arrow keys.|
+|']'|Scroll down by one character.|See above.|
+|'{'|Scroll up by 10 characters.||
+|'}'|Scroll down by 10 characters.||
 
 ### Opening files
 
