@@ -9,6 +9,8 @@ using namespace std;
 
 Editor::Editor() {
     x = 0; y = 0;
+    scrolly = 0;
+    scrollx = 0;
     mode = 'n';
     status = "Normal Mode";
     filename = "untitled";
@@ -20,6 +22,8 @@ Editor::Editor() {
 
 Editor::Editor(string fn) {
     x = 0; y = 0;
+    scrolly = 0;
+    scrollx = 0;
     mode = 'n';
     status = "Normal Mode";
     filename = fn;
