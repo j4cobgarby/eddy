@@ -42,7 +42,7 @@ Editor::Editor(string fn) {
 }
 
 void Editor::updateStatus() {
-    status = "jEdit :: ";
+    status = "";
     switch(mode) {
     case 'n':
         status += "<NORMAL>";
@@ -54,7 +54,7 @@ void Editor::updateStatus() {
         status += "<EXITING...>";
         break;
     }
-    status += "\tCOL " + tos(x) + "\tLINE " + tos(y) + "\tEDITING: " + filename;
+    status += "\t" + tos(y) + ":" + tos(x) + "\t" + filename;
 }
 
 string Editor::tos(int i) {
