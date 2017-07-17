@@ -85,21 +85,28 @@ void curses_init()
 
 int main(int argc, char* argv[])
 {
+    // The editor. This handles input and stuff
     Editor ed;
+    // local filename, to be set as the actual filename later
     string fn = "";
 
+    // if there's at least one cmd line arg given, take it and use it as the
+    // filename
     if(argc > 1)
     {
         fn = argv[1];
         ed = Editor(fn);
     }
+    // otherwise, initialise an untitled file for the editor
     else
     {
         ed = Editor();
     }
 
+    // call the function to make windows, etc.
     curses_init();
 
+    // loop while the mode isn't 'x', since if it's 'x', the user wants to exit
     while(ed.getMode() != 'x')
     {
         ed.updateStatus();
@@ -118,7 +125,7 @@ int main(int argc, char* argv[])
         ed.handleInput(input);
     }
 
-
+    // refresh and exit once the mode is 'x'
     refresh();
     endwin();
     return 0;
