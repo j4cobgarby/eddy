@@ -18,8 +18,6 @@ private:
 
     string  status, filename;
 
-    string  tos(int);
-
     void    moveUp();
     void    moveDown();
     void    moveLeft();
