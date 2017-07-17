@@ -70,23 +70,11 @@ First, clone the repository to somewhere on your hard drive.
 
 ```
 git clone https://github.com/j4cobgarby/jedit
-```
 
-Move into the root directory of the repository
-
-```
 cd path/to/repository/root
-```
 
-Clean the current build
-
-```
 make clean
-```
 
-And build for your operating system
-
-```
 make
 ```
 
