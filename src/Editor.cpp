@@ -196,11 +196,17 @@ void Editor::printBuff(WINDOW * win) {
     // Iterate lines of the editor
     for(int i=0; i<LINES-2; i++) {
         if(i >= buff->lines.size()) {
-            move(i, 0);
-            wclrtoeol(win);
+            //move(i, 0);
+            //wprintw(win, "outside");
+            //wclrtoeol(win);
         }
         else {
-            mvwprintw(win, i, 0, buff->lines[i].c_str());
+            try {
+                mvwprintw(win, i, 0, (buff->lines.at(i + scrolly)).c_str());
+            } catch (const out_of_range &oor) {
+
+            }
+            //mvwprintw(win, i, 0, tos(i+4).c_str());
         }
         wclrtoeol(win);
     }
