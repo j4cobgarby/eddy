@@ -118,8 +118,8 @@ void Editor::handleInput(int c) {
             break;
         case 127:
         case KEY_BACKSPACE:
-            if (x == 0 && y == 0) break;
-            if (x == 0 && y > 0) {
+            if (x == 0 && y+scrolly == 0) break;
+            if (x == 0 && y+scrolly > 0) {
                 x = buff->lines[y+scrolly-1].length();
                 buff->lines[y+scrolly-1] += buff->lines[y+scrolly];
                 deleteLine();
