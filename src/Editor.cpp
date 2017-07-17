@@ -213,11 +213,11 @@ void Editor::moveUp() {
 }
 
 void Editor::moveDown() {
-    if (y > LINES - 4) {
+    if (y > LINES-4) {
         scrollDown();
         return;
     }
-    if(y+scrolly+1 < LINES && y+scrolly+1 < buff->lines.size())
+    if(y+1 < LINES && y+1 < buff->lines.size())
         y++;
     if(x >= buff->lines[y].length())
         x = buff->lines[y].length();
