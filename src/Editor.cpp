@@ -109,6 +109,11 @@ void Editor::handleInput(int c) {
             }
             saveFile();
             break;
+        case 'f':
+            vector<string> fields = getFindReplaceFields();
+            string find_field = fields.at(0);
+            string replace_field = fields.at(1);
+            doFindReplace(find_field, replace_field);
         }
         break;
     case 'i':
@@ -277,4 +282,17 @@ void Editor::saveFile() {
         status = "Cannot open " + filename;
     }
     f.close();
+}
+
+void Editor::doFindReplace(string find, string replace) {
+    regex reg (find);
+    for (int i = 0; i < buff->lines.size(); i++) {
+        try {
+            string temp = buff->lines.at(i);
+            temp = regex_replace(temp, reg, replace);
+            buff->lines[i] = temp;
+        } catch (out_of_range oor) {
+            cout << "Out of range" << endl;
+        }
+    }
 }
