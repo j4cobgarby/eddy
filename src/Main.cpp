@@ -53,15 +53,22 @@ void curses_init()
     stat_win = newwin(1, COLS, LINES-1, 0);
 
     // redraw both windows
-    //redrawwin(editor_win);
-    //redrawwin(title_win);
+    redrawwin(editor_win);
+    redrawwin(title_win);
 
+    // background colour of stat_win
     wbkgd(stat_win, COLOR_PAIR(1));
 
+    // update text
     refresh();
 
+    // get value of environment variable escdelay
+    // this program works better if it's '0'
     string escdelay = getenv("ESCDELAY");
 
+    // if ESCDELAY isn't 0, make a dialog box telling the user
+    // to make it 0. however, they don't have to if they don't
+    // want to.
     if (escdelay != "0") {
         showDialog("Warning",
             {
