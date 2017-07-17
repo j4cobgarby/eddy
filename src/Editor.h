@@ -2,6 +2,7 @@
 #define EDITOR_H
 
 #include <ncurses.h>
+#include <regex>
 
 #include "Buffer.h"
 
@@ -34,6 +35,7 @@ private:
 
     void    saveFile();
 
+    void doFindReplace(string, string);
 public:
     Editor();
     Editor(string);

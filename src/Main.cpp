@@ -63,6 +63,7 @@ void curses_init()
     refresh();
 
     // Splash dialog
+    
     showDialog("jedit v0.4-beta", {
         "Hello! Welcome to jedit v0.4b!",
         "",
