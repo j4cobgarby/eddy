@@ -38,12 +38,12 @@ void curses_init()
     init_pair(2, COLOR_WHITE, COLOR_BLUE); // insert
     init_pair(3, COLOR_BLUE, COLOR_WHITE); // normal
 
-    // The window for the title of jedit, at the top
+    // The window for the title of eddy, at the top
     title_win = newwin(1, COLS, 0, 0);
     // set colour of window - white bg
     wbkgd(title_win, COLOR_PAIR(1));
     // add a title
-    wprintw(title_win, "jedit\t");
+    wprintw(title_win, "eddy\t");
     // display title
     wrefresh(title_win);
 
@@ -63,9 +63,9 @@ void curses_init()
     refresh();
 
     // Splash dialog
-    
-    showDialog("jedit v0.4-beta", {
-        "Hello! Welcome to jedit v0.4b!",
+
+    showDialog("eddy v0.4-beta", {
+        "Hello! Welcome to eddy v0.4b!",
         "",
         "Keep in mind it's in beta, so",
         "you should expect issues. If",

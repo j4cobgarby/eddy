@@ -28,7 +28,7 @@
 *.app
 
 # Specific executable
-jedit
+eddy
 
 # =========================
 # Operating System Files
