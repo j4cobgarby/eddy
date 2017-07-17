@@ -2,12 +2,23 @@
 
 void showDialog(string title, vector<string> body, int w) {
     string input;
+
+    // Calculate height based on
+    // top and bottom border = 2
+    // + title = 3
+    // + text at bottom = 4
+    // + blank spaces = 6
+    // + amount of lines in body
     int height = 6 + body.size();
 
+    // Make window in center of screen
     WINDOW * dia = newwin(height, w, (LINES / 2) - (height / 2), (COLS / 2) - (w / 2));
+    // Write message at bottom
     mvwprintw(dia, height - 2, 2, "[ENTER] to continue");
+    // default border
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
+    // print title in center
     mvwprintw(dia, 1, (w - title.length()) / 2, title.c_str());
 
     int i = 0;
@@ -46,7 +57,7 @@ string getDialogInput(string title, vector<string> body, int w) {
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print title string
-    mvwprintw(dia, 1, 2, title.c_str());
+    mvwprintw(dia, 1, (w - title.length()) / 2, title.c_str());
 
     // iterate body vector and print each line in it
     int i = 0;
