@@ -120,33 +120,33 @@ void Editor::handleInput(int c) {
         case KEY_BACKSPACE:
             if (x == 0 && y == 0) break;
             if (x == 0 && y > 0) {
-                x = buff->lines[y-1].length();
-                buff->lines[y-1] += buff->lines[y];
+                x = buff->lines[y+scrolly-1].length();
+                buff->lines[y+scrolly-1] += buff->lines[y+scrolly];
                 deleteLine();
                 moveUp();
             }
             else {
-                buff->lines[y].erase(--x, 1);
+                buff->lines[y+scrolly].erase(--x, 1);
             }
             break;
         case KEY_DC:
-            if(x == buff->lines[y].length() && y != buff->lines.size() - 1) {
-                buff->lines[y] += buff->lines[y+1];
-                deleteLine(y+1);
+            if(x == buff->lines[y+scrolly].length() && y+scrolly != buff->lines.size() - 1) {
+                buff->lines[y+scrolly] += buff->lines[y+scrolly+1];
+                deleteLine(y+scrolly+1);
             }
             else {
-                buff->lines[y].erase(x, 1);
+                buff->lines[y+scrolly].erase(x, 1);
             }
             break;
         case KEY_ENTER:
         case 10:
             if (y > LINES - 4) return;
-            if(x < buff->lines[y].length()) {
-                buff->insertLine(buff->lines[y].substr(x, buff->lines[y].length() - x), y + 1);
-                buff->lines[y].erase(x, buff->lines[y].length() - x);
+            if(x < buff->lines[y+scrolly].length()) {
+                buff->insertLine(buff->lines[y+scrolly].substr(x, buff->lines[y+scrolly].length() - x), y + scrolly + 1);
+                buff->lines[y+scrolly].erase(x, buff->lines[y+scrolly].length() - x);
             }
             else {
-                buff->insertLine("", y+1);
+                buff->insertLine("", y+scrolly+1);
             }
             x = 0;
             moveDown();
@@ -156,11 +156,11 @@ void Editor::handleInput(int c) {
         case KEY_STAB:
         case KEY_CATAB:
         case 9:
-            buff->lines[y].insert(x, 4, ' ');
+            buff->lines[y+scrolly].insert(x, 4, ' ');
             x += 4;
             break;
         default:
-            buff->lines[y].insert(x, 1, char(c));
+            buff->lines[y+scrolly].insert(x, 1, char(c));
             x++;
             break;
         }
@@ -213,6 +213,10 @@ void Editor::moveUp() {
 }
 
 void Editor::moveDown() {
+    if (y > LINES - 4) {
+        scrollDown();
+        return;
+    }
     if(y+scrolly+1 < LINES && y+scrolly+1 < buff->lines.size())
         y++;
     if(x >= buff->lines[y].length())
