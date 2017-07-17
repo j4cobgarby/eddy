@@ -100,6 +100,7 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 |`]`|Scroll down by one character.|See above.|
 |`{`|Scroll up by 10 characters.||
 |`}`|Scroll down by 10 characters.||
+|`f`|Find and replace|The find field takes a regex, but you can find a simple word too.|
 
 ### Opening files
 
