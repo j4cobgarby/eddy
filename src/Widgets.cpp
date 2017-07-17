@@ -69,6 +69,7 @@ string getDialogInput(string title, vector<string> body, int w) {
         if ((d_c == KEY_BACKSPACE || d_c == 127) && input.length() > 0) {
             input.pop_back();
 
+            // auto scroll left
             if (input.length() < scroll_amount+1) scroll_amount -= 4;
         }
         // If the pressed character is an allowed ascii character, and the
@@ -76,13 +77,16 @@ string getDialogInput(string title, vector<string> body, int w) {
         else if ((d_c >= 32 && d_c <= 126) && input.length() + 1 <= max) {
             input += d_c;
 
+            // auto scroll right
             if (input.length() - scroll_amount > input_width) scroll_amount += 5;
         }
 
+        // scroll left if left pressed
         else if (d_c == KEY_LEFT && scroll_amount > 0) {
             scroll_amount--;
         }
 
+        // scroll right if right pressed
         else if (d_c == KEY_RIGHT && scroll_amount < input.length()) {
             scroll_amount++;
         }
