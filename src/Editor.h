@@ -9,10 +9,11 @@ class Editor
 {
 private:
     int x, y;
+    int scrollamount;
     char mode;
+    bool isnewfile;
     Buffer* buff;
     string status, filename;
-    bool isnewfile;
 
     string tos(int);
 
