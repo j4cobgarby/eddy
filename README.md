@@ -2,7 +2,7 @@
 
 ## Getting Started (development)
 
-Want to develop or test jedit? Follow these instructions to do so!
+Want to develop or test eddy? Follow these instructions to do so!
 
 ### Prerequisites
 
