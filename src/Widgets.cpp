@@ -68,6 +68,8 @@ string getDialogInput(string title, vector<string> body, int w) {
         // of the input
         if ((d_c == KEY_BACKSPACE || d_c == 127) && input.length() > 0) {
             input.pop_back();
+
+            if (input.length() < scroll_amount+1) scroll_amount -= 4;
         }
         // If the pressed character is an allowed ascii character, and the
         // length limit won't be exceeded
