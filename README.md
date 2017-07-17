@@ -1,7 +1,5 @@
 ![](demo.gif)
 
-# jedit
-
 Pronounced as it's spelled (**not** as jay-edit, etc.)
 
 ## Getting Started (development)
