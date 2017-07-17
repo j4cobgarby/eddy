@@ -66,7 +66,7 @@ Once you've got the bash shell up and running, you can follow the steps for debi
 
 Now you're ready to get the development environment set up!
 
-First, clone the repository to somewhere on your hard drive.
+Run these commands in your terminal
 
 ```
 git clone https://github.com/j4cobgarby/jedit
