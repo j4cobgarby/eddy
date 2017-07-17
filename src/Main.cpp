@@ -117,9 +117,10 @@ int main(int argc, char* argv[])
         wrefresh(stat_win);
         wrefresh(title_win);
 
-        redrawwin(editor_win);
         redrawwin(title_win);
         redrawwin(stat_win);
+        wclear(editor_win);
+        redrawwin(editor_win);
 
         int input = getch();
         ed.handleInput(input);
