@@ -9,6 +9,18 @@ using namespace std;
 
 void      showDialog           (string, vector<string>, int);
 string    getDialogInput       (string, vector<string>, int);
-string*   getFindReplaceFields ();
+vector<string>   getFindReplaceFields ();
+/*
++--------------------+
+|  Find and replace  |
+|                    |
+|  Find (Regex)      |
+|  ################  |
+|                    |
+|  Replace with      |
+|  ################  |
+|                    |
++--------------------+
+*/
 
 #endif

@@ -1,6 +1,6 @@
 #include "Widgets.h"
 
-void showDialog(string title, vector<string> body, int w) {
+void showDialog(string title, vector<string> body, int width) {
     string input;
 
     // Calculate height based on
@@ -12,14 +12,14 @@ void showDialog(string title, vector<string> body, int w) {
     int height = 6 + body.size();
 
     // Make window in center of screen
-    WINDOW * dia = newwin(height, w, (LINES / 2) - (height / 2), (COLS / 2) - (w / 2));
+    WINDOW * dia = newwin(height, width, (LINES - height) / 2, (COLS - width) / 2);
     // Write message at bottom
     mvwprintw(dia, height - 2, 2, "[ENTER] to continue");
     // default border
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print title in center
-    mvwprintw(dia, 1, (w - title.length()) / 2, title.c_str());
+    mvwprintw(dia, 1, (width - title.length()) / 2, title.c_str());
 
     int i = 0;
     for (auto const& ln: body) { i++;
@@ -35,7 +35,7 @@ void showDialog(string title, vector<string> body, int w) {
     return;
 }
 
-string getDialogInput(string title, vector<string> body, int w) {
+string getDialogInput(string title, vector<string> body, int width) {
     /*
      * max: max characters in input
      * input_width: visual width of input field
@@ -44,20 +44,20 @@ string getDialogInput(string title, vector<string> body, int w) {
      * input: the typed text for the input field
      */
     int max = 128;
-    int input_width = w - 6;
+    int input_width = width - 6;
     int height = 8 + body.size();
     int scroll_amount = 0;
 
     string input;
 
     // Center the window
-    WINDOW * dia = newwin(height, w, (LINES / 2) - (height / 2), (COLS / 2) - (w / 2));
+    WINDOW * dia = newwin(height, width, (LINES - height) / 2, (COLS - width) / 2);
     mvwprintw(dia, height-2, 2, "[ENTER] to submit");
     // 0 is the default border
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print title string
-    mvwprintw(dia, 1, (w - title.length()) / 2, title.c_str());
+    mvwprintw(dia, 1, (width - title.length()) / 2, title.c_str());
 
     // iterate body vector and print each line in it
     int i = 0;
@@ -124,6 +124,42 @@ string getDialogInput(string title, vector<string> body, int w) {
     return input;
 }
 
-//string[2] getFindReplaceFields() {
+vector<string> getFindReplaceFields() {
+    string find_input = "";
+    string replace_input = "";
+    int max = 256;
+    int scroll_amount = 0;
 
-//}
+    int height = 11;
+    int width = 30;
+    int input_width = width - 6;
+    string title = "Find and Replace";
+
+    // Make window in center of screen
+    WINDOW * dia = newwin(height, width, (LINES - height) / 2, (COLS - width) / 2);
+    // Write message at bottom
+    mvwprintw(dia, height - 2, 2, "[ENTER] to go");
+    // default border
+    wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    // print title in center
+    mvwprintw(dia, 1, (width - title.length()) / 2, title.c_str());
+
+    mvwprintw(dia, 3, 3, "Find (regex)");
+    mvwprintw(dia, 6, 3, "Replace");
+
+    wattron(dia, A_REVERSE);
+    mvwprintw(dia, 4, 3, string(input_width, ' ').c_str());
+    mvwprintw(dia, 7, 3, string(input_width, ' ').c_str());
+    wattroff(dia, A_REVERSE);
+
+    wrefresh(dia);
+    redrawwin(dia);
+    int d_c;
+    while (((d_c = getch()) != KEY_ENTER) && d_c != 10) {
+    }
+    delwin(dia);
+
+    vector<string> result {"a", "b"};
+    return result;
+}

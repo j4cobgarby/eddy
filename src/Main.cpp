@@ -63,6 +63,7 @@ void curses_init()
     refresh();
 
     // Splash dialog
+    /*
     showDialog("jedit v0.4-beta", {
         "Hello! Welcome to jedit v0.4b!",
         "",
@@ -71,7 +72,8 @@ void curses_init()
         "you do encounter any, it would",
         "really help to report them on",
         "the Github repository."
-    }, 36);
+    }, 36);*/
+    vector<string> fields = getFindReplaceFields();
 }
 
 int main(int argc, char* argv[])
