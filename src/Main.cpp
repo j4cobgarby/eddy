@@ -119,6 +119,7 @@ int main(int argc, char* argv[])
 
         redrawwin(title_win);
         redrawwin(stat_win);
+        wclear(editor_win);
         redrawwin(editor_win);
 
         int input = getch();
