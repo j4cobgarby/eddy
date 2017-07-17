@@ -183,12 +183,11 @@ void Editor::moveRight() {
 }
 
 void Editor::scrollUp() {
-    scrolly--;
-    if (scrolly < 0) scrolly = 0;
+    scrollUp(1);
 }
 
 void Editor::scrollDown() {
-    scrolly++;
+    scrollDown(1);
 }
 
 void Editor::scrollUp(int amount) {
@@ -198,6 +197,7 @@ void Editor::scrollUp(int amount) {
 
 void Editor::scrollDown(int amount) {
     scrolly += amount;
+    if (scrolly > (buff->lines.size() - (LINES / 2))) scrolly = buff->lines.size() - (LINES / 2);
 }
 
 void Editor::moveUp() {
