@@ -35,6 +35,8 @@
 
 Pronounced as it's spelled (**not** as jay-edit, etc.)
 
+![](https://github.com/j4cobgarby/jedit/blob/master/screenshot1.png)
+
 ## Getting Started (development)
 
 Want to develop or test jedit? Follow these instructions to do so!
