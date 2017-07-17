@@ -27,7 +27,7 @@ Editor::Editor(string fn) {
 
     buff = new Buffer();
 
-    ifstream infile(fn.c_str());
+    fstream infile(fn.c_str());
     if(infile.is_open()) {
         while(!infile.eof()) {
             string temp;
@@ -36,7 +36,7 @@ Editor::Editor(string fn) {
         }
     }
     else {
-        cerr << "Can't open '" << fn << "'.\n";
+        cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
         buff->appendLine("");
     }
 }
