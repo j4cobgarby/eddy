@@ -45,7 +45,7 @@ Now you're ready to get the development environment set up!
 Run these commands in your terminal
 
 ```
-git clone https://github.com/j4cobgarby/jedit
+git clone https://github.com/j4cobgarby/eddy
 
 cd path/to/repository/root
 
@@ -57,7 +57,7 @@ make
 Now you can simply run it
 
 ```
-./jedit
+./eddy
 ```
 
 ## Built With
@@ -74,14 +74,14 @@ Now you can simply run it
 
 ## How to use
 
-Similar to vim, jedit has different modes for editing files. jedit has two modes:
+Similar to vim, eddy has different modes for editing files. eddy has two modes:
 
  - `NORMAL`
  - `INSERT`
 
 ### NORMAL mode
 
-When you open up jedit, you'll be in `NORMAL`. This is the mode in which you can make use of jedit's
+When you open up eddy, you'll be in `NORMAL`. This is the mode in which you can make use of eddy's
 different commands. To switch from `NORMAL` to `INSERT`, simply press `i`.
 
 ### INSERT mode
@@ -93,8 +93,8 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 
 |Key|Action|Notes|
 |---|---|---|
-|`x`|Quits jedit|Doesn't prompt to save. Make sure you've already saved if you want to keep what you've done.|
-|`s`|Saves the current file|If you're not editing a file and instead writing a new file from scratch, jedit will open a dialog box asking for you to name your new file.|
+|`x`|Quits eddy|Doesn't prompt to save. Make sure you've already saved if you want to keep what you've done.|
+|`s`|Saves the current file|If you're not editing a file and instead writing a new file from scratch, eddy will open a dialog box asking for you to name your new file.|
 |`i`|Enters insert mode.||
 |`[`|Scroll up by one character.|You can of course scroll normally by getting near to the bottom or top of the viewport using the arrow keys.|
 |`]`|Scroll down by one character.|See above.|
@@ -104,10 +104,10 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 
 ### Opening files
 
-To open a file in jedit, you must do so when you run the program. The file name is specified as a command line argument.
+To open a file in eddy, you must do so when you run the program. The file name is specified as a command line argument.
 
 ```
-jedit path/to/file
+eddy path/to/file
 ```
 
 *Note at the moment, file paths can't include spaces. This is a known issue.*
@@ -117,7 +117,7 @@ jedit path/to/file
 You can create a new file the same way you'd open one which already exists. Suppose you want to create a file called `new_file.txt`, you could do this
 
 ```
-jedit new_file.txt
+eddy new_file.txt
 ```
 
 And then, once it's loaded, press `s` to create it.
@@ -126,18 +126,18 @@ Alternatively you could rely on your operating system's commands
 
 ```
 touch new_file.txt
-jedit new_file.txt
+eddy new_file.txt
 ```
 
 or something like that. If that doesn't work, you could always do
 
 ```
 echo> new_file.txt
-jedit new_file.txt
+eddy new_file.txt
 ```
 
 ## Authors
 
 * **Jacob Garby** - *Initial development* - [j4cobgarby](https://github.com/j4cobgarby)
 
-See also the list of [contributors](https://github.com/j4cobgarby/jedit/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/j4cobgarby/eddy/contributors) who participated in this project.
