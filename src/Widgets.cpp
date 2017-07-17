@@ -123,3 +123,7 @@ string getDialogInput(string title, vector<string> body, int w) {
     delwin(dia);
     return input;
 }
+
+//string[2] getFindReplaceFields() {
+
+//}
