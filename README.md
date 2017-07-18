@@ -105,7 +105,7 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 |`]`|Scroll down by one character.|See above.|
 |`{`|Scroll up by 10 characters.||
 |`}`|Scroll down by 10 characters.||
-|`f`|Find and replace|The find field takes a regex, but you can find a simple word too.|
+|`f`|Find and replace|The find field takes a regex, but you can find a simple word too. Also, in the replace field, you can include things such as $1 or $2 to get capture groups from the regex.|
 |`o`|Opens a file from a given path.|You're prompted to write the path in a dialog box. If you write nothing, or something which can't be a filename, the file will be named untitled once saved.|
 |`O`|Opens a file from a URL on the internet.|Note that you must type a _capital_ O. You obviously need internet for this to work.|
 
