@@ -27,8 +27,8 @@ sudo apt-get install g++
 
 #### Other linux systems, or MacOS
 
-Use whichever package manager you have on your operating system (e.g. pacman, homebrew)
-to install the neccessary packages. They are probably named identically regardless.
+ - [Debian, centos, fedora](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/)
+ - [MacOS](`brew install curses`)
 
 #### Windows
 
