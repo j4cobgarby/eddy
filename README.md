@@ -104,14 +104,25 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 |`}`|Scroll down by 10 characters.||
 |`f`|Find and replace|The find field takes a regex, but you can find a simple word too.|
 |`o`|Opens a file from a given path.|You're prompted to write the path in a dialog box. If you write nothing, or something which can't be a filename, the file will be named untitled once saved.|
+|`O`|Opens a file from a URL on the internet.|Note that you must type a _capital_ O. You obviously need internet for this to work.|
 
 ### Opening files
 
-To open a file in eddy, you must do so when you run the program. The file name is specified as a command line argument.
+You can open files in many different ways:
+
+ - Local file, from command line
 
 ```
 eddy path/to/file
 ```
+
+ - Local file, from eddy
+
+ Press `o` when in `NORMAL` mode.
+
+ - File from URL, from eddy
+
+ Press `O` when in `NORMAL` mode.
 
 *Note at the moment, file paths can't include spaces. This is a known issue.*
 
