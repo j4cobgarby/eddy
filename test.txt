@@ -1,3 +1,1 @@
-Hello, world!
 
-This file will be opened directly from eddy!

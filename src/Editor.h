@@ -14,6 +14,7 @@ private:
     int     scrollx;
     char    mode;
     bool    isnewfile;
+    bool    modified;
 
     Buffer* buff;
 

@@ -15,6 +15,7 @@ Editor::Editor() {
     status = "";
     filename = "untitled";
     isnewfile = true;
+    modified = false;
 
     buff = new Buffer();
     buff->appendLine("");
@@ -28,6 +29,7 @@ Editor::Editor(string fn) {
     status = "";
     filename = fn;
     isnewfile = false;
+    modified = false;
 
     buff = new Buffer();
 
@@ -59,6 +61,9 @@ void Editor::updateStatus() {
         break;
     }
     status += "\t" + to_string(y + 1 + scrolly) + ":" + to_string(x + 1) + "\t" + filename;
+    if (modified) {
+        status += "*";
+    }
 }
 
 void Editor::handleInput(int c) {
@@ -92,6 +97,18 @@ void Editor::handleInput(int c) {
             scrollUp(10);
             break;
         case 'x':
+            if (modified) {
+                if (isnewfile) {
+                    filename = getDialogInput("Save", {
+                        "Don't forget to name your file!",
+                        "You're currently editing an untitled",
+                        "file, which isn't a very good name.",
+                        "Type the name (or path) below"
+                    }, 54);
+                    isnewfile = false;
+                }
+                saveFile();
+            }
             mode = 'x';
             break;
         case 'i':
@@ -115,6 +132,7 @@ void Editor::handleInput(int c) {
                 string find_field = fields.at(0);
                 string replace_field = fields.at(1);
                 doFindReplace(find_field, replace_field);
+                modified = true;
                 x = 0;
                 break;
             }
@@ -138,18 +156,22 @@ void Editor::handleInput(int c) {
                 buff->lines[y+scrolly-1] += buff->lines[y+scrolly];
                 deleteLine();
                 moveUp();
+                modified = true;
             }
             else {
                 buff->lines[y+scrolly].erase(--x, 1);
+                modified = true;
             }
             break;
         case KEY_DC:
             if(x == buff->lines[y+scrolly].length() && y+scrolly != buff->lines.size() - 1) {
                 buff->lines[y+scrolly] += buff->lines[y+scrolly+1];
                 deleteLine(y+scrolly+1);
+                modified = true;
             }
             else {
                 buff->lines[y+scrolly].erase(x, 1);
+                modified = true;
             }
             break;
         case KEY_ENTER:
@@ -157,9 +179,11 @@ void Editor::handleInput(int c) {
             if(x < buff->lines[y+scrolly].length()) {
                 buff->insertLine(buff->lines[y+scrolly].substr(x, buff->lines[y+scrolly].length() - x), y + scrolly + 1);
                 buff->lines[y+scrolly].erase(x, buff->lines[y+scrolly].length() - x);
+                modified = true;
             }
             else {
                 buff->insertLine("", y+scrolly+1);
+                modified = true;
             }
             x = 0;
             moveDown();
@@ -171,10 +195,12 @@ void Editor::handleInput(int c) {
         case 9:
             buff->lines[y+scrolly].insert(x, 4, ' ');
             x += 4;
+            modified = true;
             break;
         default:
             buff->lines[y+scrolly].insert(x, 1, char(c));
             x++;
+            modified = true;
             break;
         }
         break;
@@ -312,6 +338,8 @@ void Editor::openFile(string fn) {
         }, 35);
         cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
         buff->appendLine("");
+        isnewfile = true;
+        filename = "untitled";
     }
 }
 
