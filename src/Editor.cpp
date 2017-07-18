@@ -239,7 +239,7 @@ void Editor::printBuff(WINDOW * win) {
         }
         else {
             try {
-                mvwprintw(win, i, 0, (buff->lines.at(i + scrolly)).c_str());
+                mvwprintw(win, i, 0, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
             } catch (out_of_range oor) {}
         }
         wclrtoeol(win);
