@@ -277,10 +277,7 @@ void Editor::printBuff(WINDOW * win) {
     for(int i=0; i<LINES-2; i++) {
         if (i + scrolly < buff->lines.size()) {
             try {
-                const char* this_line = buff->lines.at(i + scrolly).substr(0, COLS).c_str();
-                for (int n = 0; n < strlen(this_line); n++) {
-                    mvwaddch(win, i, n, this_line[n]);
-                }
+                mvwprintw(win, i, 0, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
             } catch (out_of_range oor) {}
         }
         wclrtoeol(win);
