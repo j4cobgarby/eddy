@@ -154,7 +154,6 @@ void Editor::handleInput(int c) {
             break;
         case KEY_ENTER:
         case 10:
-            if (y+scrolly > LINES - 4) return;
             if(x < buff->lines[y+scrolly].length()) {
                 buff->insertLine(buff->lines[y+scrolly].substr(x, buff->lines[y+scrolly].length() - x), y + scrolly + 1);
                 buff->lines[y+scrolly].erase(x, buff->lines[y+scrolly].length() - x);
@@ -307,6 +306,10 @@ void Editor::openFile(string fn) {
         }
     }
     else {
+        showDialog("Error", {
+            "The file you specified doesn't",
+            "exist."
+        }, 35);
         cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
         buff->appendLine("");
     }
