@@ -28,7 +28,10 @@ sudo apt-get install g++
 #### Other linux systems, or MacOS
 
  - [Debian, centos, fedora](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/)
- - [MacOS](`brew install curses`)
+ - MacOS
+ ```
+ brew install curses
+ ```
 
 #### Windows
 
