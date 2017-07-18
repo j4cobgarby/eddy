@@ -110,11 +110,19 @@ void Editor::handleInput(int c) {
             saveFile();
             break;
         case 'f':
-            vector<string> fields = getFindReplaceFields();
-            string find_field = fields.at(0);
-            string replace_field = fields.at(1);
-            doFindReplace(find_field, replace_field);
-            x = 0;
+            {
+                vector<string> fields = getFindReplaceFields();
+                string find_field = fields.at(0);
+                string replace_field = fields.at(1);
+                doFindReplace(find_field, replace_field);
+                x = 0;
+                break;
+            }
+        case 'o':
+            openFile(getDialogInput("Open", {
+                "Type a file path"
+            }, 40));
+            break;
         }
         break;
     case 'i':
@@ -279,6 +287,29 @@ void Editor::saveFile() {
         status = "Cannot open " + filename;
     }
     f.close();
+}
+
+void Editor::openFile(string fn) {
+    x = 0; y = 0;
+    scrolly = 0;
+    scrollx = 0;
+    filename = fn;
+    isnewfile = false;
+
+    buff = new Buffer();
+
+    fstream infile(fn.c_str());
+    if(infile.is_open()) {
+        while(!infile.eof()) {
+            string temp;
+            getline(infile, temp);
+            buff->appendLine(temp);
+        }
+    }
+    else {
+        cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
+        buff->appendLine("");
+    }
 }
 
 void Editor::doFindReplace(string find, string replace) {

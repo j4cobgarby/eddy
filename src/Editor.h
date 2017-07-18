@@ -34,8 +34,9 @@ private:
     void    deleteLine(int);
 
     void    saveFile();
+    void    openFile(string);
 
-    void doFindReplace(string, string);
+    void    doFindReplace(string, string);
 public:
     Editor();
     Editor(string);
