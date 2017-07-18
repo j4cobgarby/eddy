@@ -143,6 +143,13 @@ void Editor::handleInput(int c) {
                 "Type a file path"
             }, 40));
             break;
+        case 'O':
+            {
+              vector<string> fields = getOpenURLFields();
+              string wget = "wget -O "+fields.at(1)+" "+fields.at(0);
+              system(wget.c_str());
+              openFile(fields.at(1));
+            }
         }
         break;
     case 'i':

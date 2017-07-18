@@ -7,20 +7,9 @@
 
 using namespace std;
 
-void      showDialog           (string, vector<string>, int);
-string    getDialogInput       (string, vector<string>, int);
+void             showDialog           (string, vector<string>, int);
+string           getDialogInput       (string, vector<string>, int);
 vector<string>   getFindReplaceFields ();
-/*
-+--------------------+
-|  Find and replace  |
-|                    |
-|  Find (Regex)      |
-|  ################  |
-|                    |
-|  Replace with      |
-|  ################  |
-|                    |
-+--------------------+
-*/
+vector<string>   getOpenURLFields     ();
 
 #endif
