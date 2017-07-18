@@ -233,11 +233,7 @@ void Editor::moveDown() {
 void Editor::printBuff(WINDOW * win) {
     // Iterate lines of the editor
     for(int i=0; i<LINES-2; i++) {
-        if(i >= buff->lines.size()) {
-            move(i, 0);
-            wclrtoeol(win);
-        }
-        else {
+        if (i + scrolly < buff->lines.size()) {
             try {
                 mvwprintw(win, i, 0, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
             } catch (out_of_range oor) {}
