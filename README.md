@@ -1,5 +1,9 @@
 ![](demo.gif)
 
+## Getting started (downloading executable)
+
+If you simply want to quickly have a look at eddy, you can download the most recent binary from [releases](https://github.com/j4cobgarby/eddy/releases), but note that these aren't entirely up to date with the commits, and since they've all been built on an ubuntu subsystem on Windows, they won't necessarily work on your computer. In most cases, it's better to build the program yourself for the time being.
+
 ## Getting Started (development)
 
 Want to develop or test eddy? Follow these instructions to do so!
