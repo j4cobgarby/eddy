@@ -18,7 +18,7 @@ Want to develop or test eddy? Follow these instructions to do so!
 
 ```
 sudo apt-get update
-sudo apt-get install ncurses
+sudo apt-get install libncurses5-dev libncursesw5-dev
 ```
 And if you don't already have g++
 ```
