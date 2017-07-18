@@ -128,12 +128,14 @@ void Editor::handleInput(int c) {
             break;
         case 'f':
             {
-                vector<string> fields = getFindReplaceFields();
-                string find_field = fields.at(0);
-                string replace_field = fields.at(1);
-                doFindReplace(find_field, replace_field);
-                modified = true;
-                x = 0;
+                {
+                    vector<string> fields = getFindReplaceFields();
+                    string find_field = fields.at(0);
+                    string replace_field = fields.at(1);
+                    doFindReplace(find_field, replace_field);
+                    modified = true;
+                    x = 0;
+                }
                 break;
             }
         case 'o':
