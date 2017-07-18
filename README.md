@@ -72,7 +72,10 @@ Now you can simply run it
  1. Fork it
  2. Create a new branch for your new feature
  3. Develop this branch - comment (briefly or in detail) how it all works
- 4. Push your fork
+ 4. Make sure you've changed all the necessary bits and pieces to reflect the new version. These are
+   - In `main.cpp`: the title bar's text, and the title of the splash dialog.
+   - Made relevant changed to `README.md` (commands, etc..)
+ 5. Push your fork
 
 ## How to use
 
