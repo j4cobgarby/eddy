@@ -43,7 +43,7 @@ void curses_init()
     // set colour of window - white bg
     wbkgd(title_win, COLOR_PAIR(1));
     // add a title
-    wprintw(title_win, "eddy\t");
+    wprintw(title_win, "\teddy v0.6 beta");
     // display title
     wrefresh(title_win);
 
