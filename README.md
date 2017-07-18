@@ -99,6 +99,7 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 |`{`|Scroll up by 10 characters.||
 |`}`|Scroll down by 10 characters.||
 |`f`|Find and replace|The find field takes a regex, but you can find a simple word too.|
+|`o`|Opens a file from a given path.|You're prompted to write the path in a dialog box. If you write nothing, or something which can't be a filename, the file will be named untitled once saved.|
 
 ### Opening files
 
