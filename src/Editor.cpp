@@ -51,13 +51,13 @@ void Editor::updateStatus() {
     status = "";
     switch(mode) {
     case 'n':
-        status += "<NORMAL>";
+        status += "Normal";
         break;
     case 'i':
-        status += "<INSERT>";
+        status += "Insert";
         break;
     case 'x':
-        status += "<EXITING...>";
+        status += "Exiting";
         break;
     }
     status += "\t" + to_string(y + 1 + scrolly) + ":" + to_string(x + 1) + "\t" + filename;
