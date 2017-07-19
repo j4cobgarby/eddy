@@ -38,6 +38,9 @@ private:
     void    openFile(string);
 
     void    doFindReplace(string, string);
+
+    int     digits_in_num(int);
+    int     longest_line_number(vector<string>);
 public:
     Editor();
     Editor(string);

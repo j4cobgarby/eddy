@@ -29,6 +29,8 @@ void curses_init()
     // get all keys
     keypad(stdscr, true);
 
+    use_default_colors();
+
     // make colours pairs
     // they can be reference like
     // COLOR_PAIR(index)

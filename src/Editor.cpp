@@ -272,17 +272,36 @@ void Editor::moveDown() {
     move(y, x);
 }
 
+int Editor::digits_in_num(int n) {
+    return to_string(n).length();
+}
+
+// longest by digits
+int Editor::longest_line_number(vector<string> vec) {
+    return digits_in_num(vec.size());
+}
+
 void Editor::printBuff(WINDOW * win) {
+    int longest_ln_number = longest_line_number(buff->lines);
+
     // Iterate lines of the editor
     for(int i=0; i<LINES-2; i++) {
+        wattron(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
+        mvwprintw(win, i, 0, string(longest_ln_number+1, ' ').c_str());
+        wattroff(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
+
         if (i + scrolly < buff->lines.size()) {
             try {
-                mvwprintw(win, i, 0, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
+                wattron(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
+                mvwprintw(win, i, 0, to_string(i + scrolly + 1).c_str());
+                wattroff(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
+                mvwprintw(win, i, longest_ln_number+2, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
             } catch (out_of_range oor) {}
         }
         wclrtoeol(win);
     }
-    move(y+1, x);
+    // Move to the actual place where the cursor is
+    move(y+1, x+longest_ln_number+2);
 }
 
 void Editor::printStatusLine(WINDOW * win) {
