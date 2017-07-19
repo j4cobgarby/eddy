@@ -206,6 +206,21 @@ void Editor::handleInput(int c) {
             x += 4;
             modified = true;
             break;
+        case '{':
+            buff->lines[y+scrolly].insert(x, "{}");
+            x++;
+            modified = true;
+            break;
+        case '(':
+            buff->lines[y+scrolly].insert(x, "()");
+            x++;
+            modified = true;
+            break;
+        case '[':
+            buff->lines[y+scrolly].insert(x, "[]");
+            x++;
+            modified = true;
+            break;
         default:
             buff->lines[y+scrolly].insert(x, 1, char(c));
             x++;
