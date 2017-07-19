@@ -287,15 +287,16 @@ void Editor::printBuff(WINDOW * win) {
     // Iterate lines of the editor. Subtract 2 because of the title and status
     // bars
     for(int i=0; i<LINES-2; i++) {
-        wattron(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
+        int col_pair = (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2));
+        wattron(win, col_pair);
         mvwprintw(win, i, 0, string(longest_ln_number+1, ' ').c_str());
-        wattroff(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
+        wattroff(win, col_pair);
 
         if (i + scrolly < buff->lines.size()) {
             try {
-                wattron(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
+                wattron(win, col_pair);
                 mvwprintw(win, i, 0, to_string(i + scrolly + 1).c_str());
-                wattroff(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
+                wattroff(win, col_pair);
                 mvwprintw(win, i, longest_ln_number+2, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
             } catch (out_of_range oor) {}
         }
