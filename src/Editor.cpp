@@ -284,7 +284,8 @@ int Editor::longest_line_number(vector<string> vec) {
 void Editor::printBuff(WINDOW * win) {
     int longest_ln_number = longest_line_number(buff->lines);
 
-    // Iterate lines of the editor
+    // Iterate lines of the editor. Subtract 2 because of the title and status
+    // bars
     for(int i=0; i<LINES-2; i++) {
         wattron(win, (mode == 'n' ? COLOR_PAIR(3) : COLOR_PAIR(2)));
         mvwprintw(win, i, 0, string(longest_ln_number+1, ' ').c_str());
