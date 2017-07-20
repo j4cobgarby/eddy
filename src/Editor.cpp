@@ -48,7 +48,12 @@ Editor::Editor(string fn) {
         buff->appendLine("");
     }
 
-    currentLang = "python3";
+    currentLang = "";
+}
+
+string Editor::get_file_extension(string path) {
+    size_t last_dot_pos = path.rfind(".");
+    return path.substr(last_dot_pos+1, path.length());
 }
 
 void Editor::updateStatus() {

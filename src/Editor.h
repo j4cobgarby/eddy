@@ -50,6 +50,8 @@ private:
     int     digits_in_num(int);
     int     longest_line_number(vector<string>);
 
+    void    set_current_lang();
+
     string  currentLang;
 public:
     Editor();
@@ -59,12 +61,14 @@ public:
 
     char getMode() {return mode;}
 
-    vector<string, vector<string>> file_extension_to_lang;
+    map<string, vector<string>> file_extension_to_lang;
 
     void handleInput(int);
     void printBuff(WINDOW * win);
     void printStatusLine(WINDOW * win);
     void updateStatus();
+
+    string get_file_extension(string);
 };
 
 #endif

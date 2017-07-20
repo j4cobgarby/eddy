@@ -8,5 +8,26 @@ void Editor::initLangs() {
     {"operator", R"((\+|-|\*|\/|%|\*\*|\/\/|==|!=|>=|<=|<<|>>|>|<|=|\+=|-=|\*=|\/=|%=|\*\*=|\/\/=|&|\||\^|~|@))"}
   };
   this->langs["python3"] = python3;
-  file_extension_to_lang["python3"] = vector<string>("py", "py3");
+  file_extension_to_lang["python3"] = vector<string>{
+    "py", "py3"
+  };
+
+
+  // new languages here
+  // ...
+
+
+  // Now set the currentLang based on the file extension
+  set_current_lang();
+}
+
+void Editor::set_current_lang() {
+  for (pair<string, vector<string>> lang_def : file_extension_to_lang) {
+
+    for (string file_ext : lang_def.second) {
+        if (get_file_extension(filename) == file_ext) {
+            currentLang = lang_def.first;
+        }
+    }
+  }
 }

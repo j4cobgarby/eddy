@@ -1,5 +1,1 @@
-from time import *
-
-for i in range(20):
-    print(i)
-    time.sleep(2)
+Hello, world! 3.5
