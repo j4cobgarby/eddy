@@ -19,6 +19,8 @@ Editor::Editor() {
 
     buff = new Buffer();
     buff->appendLine("");
+
+    currentLang = "";
 }
 
 Editor::Editor(string fn) {
@@ -45,6 +47,13 @@ Editor::Editor(string fn) {
         cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
         buff->appendLine("");
     }
+
+    currentLang = "";
+}
+
+string Editor::get_file_extension(string path) {
+    size_t last_dot_pos = path.rfind(".");
+    return path.substr(last_dot_pos+1, path.length());
 }
 
 void Editor::updateStatus() {
@@ -317,8 +326,68 @@ void Editor::printBuff(WINDOW * win) {
         }
         wclrtoeol(win);
     }
-    // Move to the actual place where the cursor is
+    // Move the cursor to the correct location so that the user knows what
+    // they're editing
     move(y+1, x+longest_ln_number+2);
+
+    /*
+    Now for syntax highlighting
+    The basic idea is this:
+     - iterate all the language definition regex for the currently selected
+        language.
+     - put all of the matches, in a pair with their colour, all in a pair with
+        its index, in a vector
+     - should get something like:
+
+        vector<pair<int, pair<string, int>>>
+        a vector of pairs of ints and pairs of strings and ints
+
+        {
+            {0, ["print", 4]},
+            {6, ["\"Hello, world!\"", 4]},
+                etc...
+        }
+    */
+
+    if (currentLang == "" || currentLang == "text" || currentLang == "plaintext")
+        return;
+
+    string buffer_string = buff->toString();
+    vector<pair<int, pair<string, int>>> matches;
+    for (pair<string, string> type : langs[currentLang]) {
+        // type.second is each regex
+
+        regex r(type.second);
+
+        for (sregex_iterator i = sregex_iterator(buffer_string.begin(), buffer_string.end(), r);
+            i != sregex_iterator();
+            ++i)
+        {
+            pair<int, pair<string, int>> p;
+            smatch m = *i;
+            if (m[0].matched) {
+                p.first = m.position(1);
+                p.second.first = m[1].str();
+                // default colour
+                p.second.second = 4;
+
+                if (type.first == "number") p.second.second = 4;
+                if (type.first == "string") p.second.second = 5;
+                if (type.first == "keyword") p.second.second = 6;
+                if (type.first == "operator") p.second.second = 7;
+                if (type.first == "function") p.second.second = 8;
+
+                matches.push_back(p);
+            }
+        }
+    }
+
+    for (pair<int, pair<string, int>> match : matches) {
+        wattron(win, COLOR_PAIR(match.second.second) | A_BOLD);
+        int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
+        mvwprintw(win, y_index, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
+        wattroff(win, COLOR_PAIR(match.second.second) | A_BOLD);
+    }
 }
 
 void Editor::printStatusLine(WINDOW * win) {
