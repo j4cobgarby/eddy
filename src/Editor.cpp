@@ -369,19 +369,12 @@ void Editor::printBuff(WINDOW * win) {
         }
     }
 
-    ofstream logfile ("debug.log");
-
     for (pair<int, pair<string, int>> match : matches) {
         wattron(win, COLOR_PAIR(4));
         int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
-        mvwprintw(win, y_index, match.first+longest_ln_number+2, match.second.first.c_str());
+        mvwprintw(win, y_index, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
         wattroff(win, COLOR_PAIR(4));
-
-        logfile << match.second.first;
-        logfile << "\n";
     }
-
-    logfile.close();
 }
 
 void Editor::printStatusLine(WINDOW * win) {

@@ -29,6 +29,12 @@ int Buffer::yIndexFromIndexInString(int index, string s) {
     return yindex;
 }
 
+int Buffer::xIndexFromIndexInString(int index, string s) {
+    string before_index = s.substr(0, index);
+    size_t last_newline = before_index.find_last_of("\n");
+    return before_index.length() - last_newline;
+}
+
 void Buffer::insertLine(string line, int n) {
     line = remTabs(line);
     lines.insert(lines.begin()+n, line);

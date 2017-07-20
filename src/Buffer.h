@@ -24,6 +24,13 @@ public:
     // Get's the actual y index of something in a file, based on it's
     // index in a given string and the amount of newlines before it.
     int yIndexFromIndexInString(int, string);
+    // Get's the to-display x index.
+    // this is calculated by getting a substring of the buffer string
+    // from 0 to the index of the token
+    // then, finding the index of the last newline character in this
+    // and then subtracting that newline's index from the length of
+    // the substring
+    int xIndexFromIndexInString(int, string);
 };
 
 #endif

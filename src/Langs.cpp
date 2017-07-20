@@ -3,8 +3,8 @@
 void Editor::initLangs() {
   map<string, string> python3 {
     {"number", R"(([+-]?(\d*[.])?\d+))"},
-    {"string", R"(\"((\\\"|[^\"\n])*)\")"},
-    {"keyword", "False|None|True|and|as|asset|break|class|continue|def|del|elif|else|except|finally|for|from|global|if|in|import|in|is|is not|lambda|nonlocal|not|not in|or|pass|raise|return|try|while|with|yield"},
+    {"string", R"((\"((\\\"|[^\"\n])*)\"))"},
+    {"keyword", "(continue|nonlocal|finally|assert|except|global|import|lambda|return|False|break|class|raise|while|yield|None|True|elif|else|from|pass|with|and|def|del|for|not|try|as|if|in|is|or)"},
     {"operators", R"(\+|-|\*|\/|%|\*\*|\/\/|==|!=|>=|<=|<<|>>|>|<|=|\+=|-=|\*=|\/=|%=|\*\*=|\/\/=|&|\||\^|~|@)"}
   };
   this->langs["python3"] = python3;
