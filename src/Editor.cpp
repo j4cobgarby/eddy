@@ -19,6 +19,8 @@ Editor::Editor() {
 
     buff = new Buffer();
     buff->appendLine("");
+
+    currentLang = "python3";
 }
 
 Editor::Editor(string fn) {
@@ -45,6 +47,8 @@ Editor::Editor(string fn) {
         cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
         buff->appendLine("");
     }
+
+    currentLang = "python3";
 }
 
 void Editor::updateStatus() {
@@ -365,7 +369,19 @@ void Editor::printBuff(WINDOW * win) {
         }
     }
 
+    ofstream logfile ("debug.log");
 
+    for (pair<int, pair<string, int>> match : matches) {
+        wattron(win, COLOR_PAIR(4));
+        int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
+        mvwprintw(win, y_index, match.first+longest_ln_number+2, match.second.first.c_str());
+        wattroff(win, COLOR_PAIR(4));
+
+        logfile << match.second.first;
+        logfile << "\n";
+    }
+
+    logfile.close();
 }
 
 void Editor::printStatusLine(WINDOW * win) {
