@@ -445,7 +445,7 @@ void Editor::openFile(string fn) {
         while(!infile.eof()) {
             string temp;
             getline(infile, temp);
-            buff->appendLine(temp);
+            buff->appendLine(buff->remTabs(temp));
         }
     }
     else {
