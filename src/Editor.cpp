@@ -356,7 +356,7 @@ void Editor::printBuff(WINDOW * win) {
         {
             pair<int, pair<string, int>> p;
             smatch m = *i;
-            if (m[1].matched) {
+            if (m[0].matched) {
                 p.first = m.position(1);
                 p.second.first = m[1].str();
                 p.second.second = 4;
