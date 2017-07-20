@@ -340,6 +340,15 @@ void Editor::printBuff(WINDOW * win) {
                 etc...
         }
     */
+
+    if (currentLang == "" || currentLang == "text" || currentLang == "plaintext")
+        return;
+
+    vector<pair<int, pair<string, int>>> matches;
+    for (pair<string, string> type : langs[currentLang]) {
+
+        // type.second is each regex
+    }
 }
 
 void Editor::printStatusLine(WINDOW * win) {
