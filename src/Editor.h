@@ -47,6 +47,8 @@ private:
 
     int     digits_in_num(int);
     int     longest_line_number(vector<string>);
+
+    string  currentLang;
 public:
     Editor();
     Editor(string);

@@ -20,6 +20,15 @@ string Buffer::toString() {
   return result;
 }
 
+int Buffer::yIndexFromIndexInString(int index, string s) {
+    string before_index = s.substr(0, index);
+    int yindex = 0;
+    for (int i = 0; i < before_index.length(); i++) {
+      if (before_index[i] == '\n') yindex++;
+    }
+    return yindex;
+}
+
 void Buffer::insertLine(string line, int n) {
     line = remTabs(line);
     lines.insert(lines.begin()+n, line);

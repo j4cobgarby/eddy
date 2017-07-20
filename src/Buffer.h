@@ -21,6 +21,9 @@ public:
     string remTabs(string);
     // Return a newline seperated string representation of the buffer
     string toString();
+    // Get's the actual y index of something in a file, based on it's
+    // index in a given string and the amount of newlines before it.
+    int yIndexFromIndexInString(int, string);
 };
 
 #endif
