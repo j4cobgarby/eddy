@@ -27,6 +27,7 @@ void Editor::set_current_lang() {
     for (string file_ext : lang_def.second) {
         if (get_file_extension(filename) == file_ext) {
             currentLang = lang_def.first;
+            return;
         }
     }
   }
