@@ -321,7 +321,6 @@ void Editor::printBuff(WINDOW * win) {
     // they're editing
     move(y+1, x+longest_ln_number+2);
 
-    string buffer_string = buff->toString();
     /*
     Now for syntax highlighting
     The basic idea is this:
@@ -335,8 +334,8 @@ void Editor::printBuff(WINDOW * win) {
         a vector of pairs of ints and pairs of strings and ints
 
         {
-            {0, ["print", COLOR_BLUE]},
-            {6, ["\"Hello, world!\"", COLOR_GREEN]},
+            {0, ["print", 4]},
+            {6, ["\"Hello, world!\"", 4]},
                 etc...
         }
     */
@@ -344,11 +343,29 @@ void Editor::printBuff(WINDOW * win) {
     if (currentLang == "" || currentLang == "text" || currentLang == "plaintext")
         return;
 
+    string buffer_string = buff->toString();
     vector<pair<int, pair<string, int>>> matches;
     for (pair<string, string> type : langs[currentLang]) {
-
         // type.second is each regex
+
+        regex r(type.second);
+
+        for (sregex_iterator i = sregex_iterator(buffer_string.begin(), buffer_string.end(), r);
+            i != sregex_iterator();
+            ++i)
+        {
+            pair<int, pair<string, int>> p;
+            smatch m = *i;
+            if (m[1].matched) {
+                p.first = m.position(1);
+                p.second.first = m[1].str();
+                p.second.second = 4;
+                matches.push_back(p);
+            }
+        }
     }
+
+
 }
 
 void Editor::printStatusLine(WINDOW * win) {
