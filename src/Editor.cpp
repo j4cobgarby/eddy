@@ -20,7 +20,7 @@ Editor::Editor() {
     buff = new Buffer();
     buff->appendLine("");
 
-    currentLang = "python3";
+    currentLang = "";
 }
 
 Editor::Editor(string fn) {

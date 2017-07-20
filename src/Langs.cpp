@@ -8,4 +8,5 @@ void Editor::initLangs() {
     {"operator", R"((\+|-|\*|\/|%|\*\*|\/\/|==|!=|>=|<=|<<|>>|>|<|=|\+=|-=|\*=|\/=|%=|\*\*=|\/\/=|&|\||\^|~|@))"}
   };
   this->langs["python3"] = python3;
+  file_extension_to_lang["python3"] = vector<string>("py", "py3");
 }

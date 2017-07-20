@@ -3,6 +3,8 @@
 
 #include <ncurses.h>
 #include <regex>
+#include <map>
+#include <vector>
 
 #include "Buffer.h"
 
@@ -56,6 +58,8 @@ public:
     void initLangs();
 
     char getMode() {return mode;}
+
+    vector<string, vector<string>> file_extension_to_lang;
 
     void handleInput(int);
     void printBuff(WINDOW * win);
