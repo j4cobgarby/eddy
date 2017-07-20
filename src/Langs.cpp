@@ -5,7 +5,7 @@ void Editor::initLangs() {
     {"number", R"(([+-]?(\d*[.])?\d+))"},
     {"string", R"((\"((\\\"|[^\"\n])*)\"))"},
     {"keyword", "(continue|nonlocal|finally|assert|except|global|import|lambda|return|False|break|class|raise|while|yield|None|True|elif|else|from|pass|with|and|def|del|for|not|try|as|if|in|is|or)"},
-    {"operators", R"(\+|-|\*|\/|%|\*\*|\/\/|==|!=|>=|<=|<<|>>|>|<|=|\+=|-=|\*=|\/=|%=|\*\*=|\/\/=|&|\||\^|~|@)"}
+    {"operators", R"((\+|-|\*|\/|%|\*\*|\/\/|==|!=|>=|<=|<<|>>|>|<|=|\+=|-=|\*=|\/=|%=|\*\*=|\/\/=|&|\||\^|~|@))"}
   };
   this->langs["python3"] = python3;
 }
