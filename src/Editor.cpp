@@ -364,16 +364,21 @@ void Editor::printBuff(WINDOW * win) {
                 p.first = m.position(1);
                 p.second.first = m[1].str();
                 p.second.second = 4;
+                if (type.first == "number") p.second.second = 4;
+                if (type.first == "string") p.second.second = 5;
+                if (type.first == "keyword") p.second.second = 6;
+                if (type.first == "operator") p.second.second = 7;
+                if (type.first == "function") p.second.second = 8;
                 matches.push_back(p);
             }
         }
     }
 
     for (pair<int, pair<string, int>> match : matches) {
-        wattron(win, COLOR_PAIR(match.second.second));
+        wattron(win, COLOR_PAIR(match.second.second) | A_BOLD);
         int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
         mvwprintw(win, y_index, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
-        wattroff(win, COLOR_PAIR(match.second.second));
+        wattroff(win, COLOR_PAIR(match.second.second) | A_BOLD);
     }
 }
 

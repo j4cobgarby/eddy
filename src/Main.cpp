@@ -39,7 +39,12 @@ void curses_init()
     init_pair(1, COLOR_BLACK, COLOR_WHITE); // black on white
     init_pair(2, COLOR_WHITE, COLOR_BLUE); // insert
     init_pair(3, COLOR_BLUE, COLOR_WHITE); // normal
-    init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+
+    init_pair(4, COLOR_RED, COLOR_BLACK); // number
+    init_pair(5, COLOR_GREEN, COLOR_BLACK); // string
+    init_pair(6, COLOR_BLUE, COLOR_BLACK); // keyword
+    init_pair(7, COLOR_CYAN, COLOR_BLACK); // operator
+    init_pair(8, COLOR_MAGENTA, COLOR_BLACK); // function
 
     // The window for the title of eddy, at the top
     title_win = newwin(1, COLS, 0, 0);
