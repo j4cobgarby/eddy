@@ -97,6 +97,8 @@ int main(int argc, char* argv[])
         ed = Editor();
     }
 
+    ed.initLangs();
+
     // call the function to make windows, etc.
     curses_init();
 

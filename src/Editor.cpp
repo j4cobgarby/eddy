@@ -317,8 +317,29 @@ void Editor::printBuff(WINDOW * win) {
         }
         wclrtoeol(win);
     }
-    // Move to the actual place where the cursor is
+    // Move the cursor to the correct location so that the user knows what
+    // they're editing
     move(y+1, x+longest_ln_number+2);
+
+    string buffer_string = buff->toString();
+    /*
+    Now for syntax highlighting
+    The basic idea is this:
+     - iterate all the language definition regex for the currently selected
+        language.
+     - put all of the matches, in a pair with their colour, all in a pair with
+        its index, in a vector
+     - should get something like:
+
+        vector<pair<int, pair<string, int>>>
+        a vector of pairs of ints and pairs of strings and ints
+
+        {
+            {0, ["print", COLOR_BLUE]},
+            {6, ["\"Hello, world!\"", COLOR_GREEN]},
+                etc...
+        }
+    */
 }
 
 void Editor::printStatusLine(WINDOW * win) {

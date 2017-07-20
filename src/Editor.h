@@ -20,6 +20,12 @@ private:
 
     string  status, filename;
 
+    // access like langs[language][lexeme type]
+    // e.g. langs[python][string]
+    // would return the regex to find strings in
+    // a python file
+    map<string, map<string, string>> langs;
+
     void    moveUp();
     void    moveDown();
     void    moveLeft();
@@ -44,6 +50,8 @@ private:
 public:
     Editor();
     Editor(string);
+
+    void initLangs();
 
     char getMode() {return mode;}
 

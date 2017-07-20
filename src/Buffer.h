@@ -17,7 +17,10 @@ public:
     void appendLine(string);
     void removeLine(int);
 
+    // Convert each tab to 4 spaces
     string remTabs(string);
+    // Return a newline seperated string representation of the buffer
+    string toString();
 };
 
 #endif
