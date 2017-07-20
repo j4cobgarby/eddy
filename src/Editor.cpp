@@ -370,10 +370,10 @@ void Editor::printBuff(WINDOW * win) {
     }
 
     for (pair<int, pair<string, int>> match : matches) {
-        wattron(win, COLOR_PAIR(4));
+        wattron(win, COLOR_PAIR(match.second.second));
         int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
         mvwprintw(win, y_index, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
-        wattroff(win, COLOR_PAIR(4));
+        wattroff(win, COLOR_PAIR(match.second.second));
     }
 }
 
