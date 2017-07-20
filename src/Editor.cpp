@@ -151,6 +151,7 @@ void Editor::handleInput(int c) {
             openFile(getDialogInput("Open", {
                 "Type a file path"
             }, 40));
+            set_current_lang();
             break;
         case 'O':
             {
@@ -158,6 +159,7 @@ void Editor::handleInput(int c) {
               string wget = "wget -O "+fields.at(1)+" "+fields.at(0);
               system(wget.c_str());
               openFile(fields.at(1));
+              set_current_lang();
             }
         }
         break;
