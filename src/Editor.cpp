@@ -319,7 +319,7 @@ void Editor::printBuff(WINDOW * win) {
                 wattron(win, col_pair);
                 mvwprintw(win, i, 0, to_string(i + scrolly + 1).c_str());
                 wattroff(win, col_pair);
-                mvwprintw(win, i, longest_ln_number+2, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
+                mvwprintw(win, i, longest_ln_number+2, (buff->lines.at(i + scrolly).substr(0, COLS-(longest_ln_number+1))).c_str());
             } catch (out_of_range oor) {}
         }
         wclrtoeol(win);
