@@ -9,8 +9,20 @@ void Editor::initLangs() {
     {"string", R"((\"((\\\"|[^\"\n])*)\"))"},
   };
   this->langs["python3"] = python3;
+  python3.clear();
   file_extension_to_lang["python3"] = vector<string>{
     "py", "py3"
+  };
+
+  this->langs["c++"] = map<string, string> {
+    {"function", R"((\w+)\()"},
+    {"operator", R"((\+|-|\*|/|%|\+\+|--|==|!=|>|<|>=|<=|&&|\|\||!|&|\||\^|\~|<<|>>|=|\+=|-=|\*=|/=|%=|<<=|>>=|&=|\^=|\|=|\.|->|::))"},
+    {"keyword", R"((?:\b|\d)(reinterpret_cast|atomic_noexcept|atomic_cancel|atomic_commit|conceptconst|dynamic_cast|static_asset|synchronized|thread_local|static_cast|const_cast|constexpr|namespace|protected|char16_t|char32_t|continue|decltype|explicit|noexcept|operator|register|requires|template|typename|unsigned|volatile|alignas|alignof|default|explort|mutable|nullptr|private|typedef|virtual|wchar_t|and_eq|bitand|delete|double|extern|friend|import|inline|module|not_eq|public|return|signed|sizeof|static|struct|switch|typeid|xor_eq|bitor|break|catch|class|compl|false|float|or_eq|short|throw|union|using|while|auto|bool|case|char|else|enum|goto|long|this|true|void|and|asm|for|int|new|not|try|xor|do|if|or)(?:\b|\d))"},
+    {"number", R"(([+-]?(\d*[.])?\d+))"},
+    {"string", R"((\"((\\\"|[^\"\n])*)\"))"},
+  };
+  file_extension_to_lang["c++"] = vector<string>{
+    "c++", "cc", "h", "cxx", "cpp", "hh", "H", "hxx", "hpp", "h++", "c"
   };
 
 

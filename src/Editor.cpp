@@ -384,7 +384,7 @@ void Editor::printBuff(WINDOW * win) {
     for (pair<int, pair<string, int>> match : matches) {
         wattron(win, COLOR_PAIR(match.second.second) | A_BOLD);
         int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
-        mvwprintw(win, y_index, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
+        mvwprintw(win, y_index-scrolly, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
         wattroff(win, COLOR_PAIR(match.second.second) | A_BOLD);
     }
 }
