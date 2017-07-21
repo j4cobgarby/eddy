@@ -1,7 +1,6 @@
 #include "Editor.h"
 #include "Widgets.h"
-
-using namespace std;
+using namespace std; // test
 
 /*
 This constructor is used when no filename is given as a command line
@@ -474,13 +473,14 @@ void Editor::printBuff(WINDOW * win) {
         {
             pair<int, pair<string, int>> p;
             smatch m = *i;
-            if (m[1].matched) {
-                p.first = m.position(1);
-                p.second.first = m[1].str();
+            if (m[0].matched) {
+                p.first = m.position(0);
+                p.second.first = m[0].str();
                 // default colour
                 //p.second.second = 4;
 
-                if (type.first == "number") p.second.second = 4;
+                if (type.first == "comment") p.second.second = 9;
+                else if (type.first == "number") p.second.second = 4;
                 else if (type.first == "string") p.second.second = 5;
                 else if (type.first == "keyword") p.second.second = 6;
                 else if (type.first == "operator") p.second.second = 7;

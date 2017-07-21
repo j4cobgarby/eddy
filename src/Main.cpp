@@ -45,6 +45,7 @@ void curses_init()
     init_pair(6, COLOR_BLUE, COLOR_BLACK); // keyword
     init_pair(7, COLOR_CYAN, COLOR_BLACK); // operator
     init_pair(8, COLOR_MAGENTA, COLOR_BLACK); // function
+    init_pair(0, COLOR_BLACK, COLOR_BLACK);
 
     // The window for the title of eddy, at the top
     title_win = newwin(1, COLS, 0, 0);
