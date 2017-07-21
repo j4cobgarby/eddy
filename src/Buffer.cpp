@@ -10,18 +10,14 @@ string Buffer::remTabs(string line) {
         return remTabs(line.replace(tab, 1, "    "));
 }
 
-string Buffer::toString(int start_index, int end_index) {
-    vector<string>::const_iterator first = lines.begin() + start_index;
-    vector<string>::const_iterator last = lines.begin() + end_index;
-    vector<string> lines_section(first, last);
-
-    string result;
-    for (string &line : lines_section) {
+string Buffer::toString() {
+  string result;
+  for (string &line : lines) {
       result += line;
       result += "\n";
-    }
-    // Note the result has a trailing newline
-    return result;
+  }
+  // Note the result has a trailing newline
+  return result;
 }
 
 int Buffer::yIndexFromIndexInString(int index, string s) {

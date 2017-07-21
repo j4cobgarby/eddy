@@ -51,7 +51,7 @@ void curses_init()
     // set colour of window - white bg
     wbkgd(title_win, COLOR_PAIR(1));
     // add a title
-    wprintw(title_win, "\teddy v1.0");
+    wprintw(title_win, "\teddy v1.1");
     // display title
     wrefresh(title_win);
 
@@ -72,8 +72,8 @@ void curses_init()
 
     // Splash dialog
 
-    showDialog("eddy v1.0", {
-        "Hello! Welcome to eddy v0.4b!",
+    showDialog("eddy v1.1", {
+        "Hello! Welcome!",
         "",
         "Keep in mind it's in beta, so",
         "you should expect issues. If",

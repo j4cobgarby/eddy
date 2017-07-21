@@ -157,7 +157,6 @@ void Editor::handleInput(int c) {
               openFile(fields.at(1));
               set_current_lang();
             }
-            break;
         }
         break;
     case 'i':
@@ -351,7 +350,7 @@ void Editor::printBuff(WINDOW * win) {
     if (currentLang == "" || currentLang == "text" || currentLang == "plaintext")
         return;
 
-    string buffer_string = buff->toString(scrolly, scrolly+(LINES - 2));
+    string buffer_string = buff->toString();
     vector<pair<int, pair<string, int>>> matches;
     for (pair<string, string> type : langs[currentLang]) {
         // type.second is each regex
@@ -370,11 +369,11 @@ void Editor::printBuff(WINDOW * win) {
                 // default colour
                 //p.second.second = 4;
 
-                if (type.first == "a") p.second.second = 4;
-                else if (type.first == "b") p.second.second = 5;
-                else if (type.first == "c") p.second.second = 6;
-                else if (type.first == "d") p.second.second = 7;
-                else if (type.first == "e") p.second.second = 8;
+                if (type.first == "number") p.second.second = 4;
+                else if (type.first == "string") p.second.second = 5;
+                else if (type.first == "keyword") p.second.second = 6;
+                else if (type.first == "operator") p.second.second = 7;
+                else if (type.first == "function") p.second.second = 8;
 
                 matches.push_back(p);
             }
