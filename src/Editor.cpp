@@ -351,7 +351,7 @@ void Editor::printBuff(WINDOW * win) {
     if (currentLang == "" || currentLang == "text" || currentLang == "plaintext")
         return;
 
-    string buffer_string = buff->toString();
+    string buffer_string = buff->toString(scrolly, scrolly+(LINES - 2));
     vector<pair<int, pair<string, int>>> matches;
     for (pair<string, string> type : langs[currentLang]) {
         // type.second is each regex
