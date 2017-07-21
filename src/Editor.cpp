@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/*
+This constructor is used when no filename is given as a command line
+argument
+*/
 Editor::Editor() {
     x = 0; y = 0;
     scrolly = 0;
@@ -19,6 +23,10 @@ Editor::Editor() {
     currentLang = "";
 }
 
+/*
+This constructor is used when a filename is given as a command line
+argument.
+*/
 Editor::Editor(string fn) {
     x = 0; y = 0;
     scrolly = 0;
@@ -31,17 +39,7 @@ Editor::Editor(string fn) {
 
     buff = new Buffer();
 
-    ifstream infile(fn.c_str());
-
-    if (!infile) {
-        cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
-        buff->appendLine("");
-    } else {
-        int n = 0;
-        string temp;
-        while (!safeGetline(infile, temp).eof())
-            buff->appendLine(temp);
-    }
+    openFile(fn);
 
     currentLang = "";
 }
@@ -299,7 +297,7 @@ int Editor::digits_in_num(int n) {
     return to_string(n).length();
 }
 
-// longest by digits
+// amount of digits in greatest number
 int Editor::longest_line_number(vector<string> vec) {
     return digits_in_num(vec.size());
 }
