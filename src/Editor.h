@@ -5,6 +5,9 @@
 #include <regex>
 #include <map>
 #include <vector>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 #include "Buffer.h"
 
@@ -69,6 +72,8 @@ public:
     void updateStatus();
 
     string get_file_extension(string);
+
+    istream& safeGetline(istream&, string&);
 };
 
 #endif
