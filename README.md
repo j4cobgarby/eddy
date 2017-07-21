@@ -10,6 +10,8 @@ Want to develop or test eddy? Follow these instructions to do so!
 
 ### Quick version
 
+If you can't be bothered to follow the full instructions, try this. It'll probably work.
+
 ```
 sudo apt-get install libncurses5-dev libncursesw5-dev
 git clone https://github.com/j4cobgarby/eddy
