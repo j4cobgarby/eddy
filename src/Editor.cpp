@@ -157,6 +157,7 @@ void Editor::handleInput(int c) {
               openFile(fields.at(1));
               set_current_lang();
             }
+            break;
         }
         break;
     case 'i':
