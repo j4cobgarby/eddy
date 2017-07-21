@@ -277,20 +277,21 @@ void Editor::moveUp() {
     }
     if(y+scrolly-1 >= 0)
         y--;
-    if(x >= buff->lines[y].length())
-        x = buff->lines[y].length();
+    if(x >= buff->lines[y+scrolly].length())
+        x = buff->lines[y+scrolly].length();
     move(y, x);
 }
 
 void Editor::moveDown() {
+    // auto scroll
     if (y > LINES-(3 + 4)) {
         scrollDown();
         return;
     }
-    if(y+1 < LINES && y+1 < buff->lines.size())
+    if(y+scrolly+1 < LINES && y+scrolly+1 < buff->lines.size())
         y++;
-    if(x >= buff->lines[y].length())
-        x = buff->lines[y].length();
+    if(x >= buff->lines[y+scrolly].length())
+        x = buff->lines[y+scrolly].length();
     move(y, x);
 }
 
@@ -350,7 +351,7 @@ void Editor::printBuff(WINDOW * win) {
     if (currentLang == "" || currentLang == "text" || currentLang == "plaintext")
         return;
 
-    string buffer_string = buff->toString();
+    string buffer_string = buff->toString(scrolly, scrolly+(LINES - 2));
     vector<pair<int, pair<string, int>>> matches;
     for (pair<string, string> type : langs[currentLang]) {
         // type.second is each regex
@@ -384,7 +385,7 @@ void Editor::printBuff(WINDOW * win) {
     for (pair<int, pair<string, int>> match : matches) {
         wattron(win, COLOR_PAIR(match.second.second) | A_BOLD);
         int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
-        mvwprintw(win, y_index-scrolly, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
+        mvwprintw(win, y_index, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
         wattroff(win, COLOR_PAIR(match.second.second) | A_BOLD);
     }
 }

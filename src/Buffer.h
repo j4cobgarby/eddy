@@ -20,7 +20,7 @@ public:
     // Convert each tab to 4 spaces
     string remTabs(string);
     // Return a newline seperated string representation of the buffer
-    string toString();
+    string toString(int, int);
     // Get's the actual y index of something in a file, based on it's
     // index in a given string and the amount of newlines before it.
     int yIndexFromIndexInString(int, string);
