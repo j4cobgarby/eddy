@@ -44,11 +44,25 @@ Editor::Editor(string fn) {
     currentLang = "";
 }
 
+/*
+This gets the file extension of a file, by finding the index
+of the last '.', and then returning the substring between that
+index and the end of the string.
+cases:
+main.py => py
+hello.world.foo.bar => bar
+*/
 string Editor::get_file_extension(string path) {
     size_t last_dot_pos = path.rfind(".");
     return path.substr(last_dot_pos+1, path.length());
 }
 
+/*
+Updates the 'status' variable. This is used to define what content
+is shown at the status bar.
+This could be optimised by only being called when the value would be
+different
+*/
 void Editor::updateStatus() {
     status = "";
     switch(mode) {
@@ -85,6 +99,9 @@ void Editor::handleInput(int c) {
         return;
     }
     switch(mode) {
+    /*
+    If in normal mode...
+    */
     case 'n':
         switch(c) {
         case ']':
@@ -102,6 +119,10 @@ void Editor::handleInput(int c) {
         case 'x':
             if (modified) {
                 if (isnewfile) {
+                    /*
+                    If they've made a new file, and modified it, they'll
+                    be asked what they want to call it.
+                    */
                     filename = getDialogInput("Save", {
                         "Don't forget to name your file!",
                         "You're currently editing an untitled",
@@ -115,6 +136,7 @@ void Editor::handleInput(int c) {
             mode = 'x';
             break;
         case 'i':
+            // Mode i = insert
             mode = 'i';
             break;
         case 's':
@@ -132,6 +154,11 @@ void Editor::handleInput(int c) {
         case 'f':
             {
                 {
+                    /*
+                    Use a regex to replace all bits of the buffer matching
+                    a given regex with the replace field
+                    it also has a nice little dialog
+                    */
                     vector<string> fields = getFindReplaceFields();
                     string find_field = fields.at(0);
                     string replace_field = fields.at(1);
@@ -149,11 +176,14 @@ void Editor::handleInput(int c) {
             break;
         case 'O':
             {
-              vector<string> fields = getOpenURLFields();
-              string wget = "wget -O "+fields.at(1)+" "+fields.at(0);
-              system(wget.c_str());
-              openFile(fields.at(1));
-              set_current_lang();
+                vector<string> fields = getOpenURLFields();
+                // create a command to run with system(), to download a file
+                // from the internet and put it at a given path
+                string wget = "wget -O "+fields.at(1)+" "+fields.at(0);
+                system(wget.c_str());
+                // open given path, which is where the downloaded file is
+                openFile(fields.at(1));
+                set_current_lang();
             }
         }
         break;
@@ -164,7 +194,17 @@ void Editor::handleInput(int c) {
             break;
         case 127:
         case KEY_BACKSPACE:
+            /*
+            do nothing if they're at the beginning of the file
+            */
             if (x == 0 && y+scrolly == 0) break;
+            /*
+            if they're at the beginning of a line, but NOT the first line,
+            then
+             - move to the end of the previous line
+             - delete the line which backspace was pressed on
+             - move the cursor up to the correct line
+            */
             if (x == 0 && y+scrolly > 0) {
                 x = buff->lines[y+scrolly-1].length();
                 buff->lines[y+scrolly-1] += buff->lines[y+scrolly];
@@ -172,41 +212,94 @@ void Editor::handleInput(int c) {
                 moveUp();
                 modified = true;
             }
+            /*
+            if they're not at the beginning of a line
+             - decrement x and remove the xth character from the line
+            */
             else {
-                buff->lines[y+scrolly].erase(--x, 1);
+                try {
+                    char next_char = buff->lines[y+scrolly][x];
+                    if (next_char != '}' && next_char != ')' && next_char != ']') {
+                        buff->lines[y+scrolly].erase(--x, 1);
+                    } else {
+                        buff->lines[y+scrolly].erase(--x, 2);
+                    }
+                } catch (exception e) {
+                    buff->lines[y+scrolly].erase(--x, 1);
+                }
                 modified = true;
             }
             break;
+        /*
+        delete pressed
+        */
         case KEY_DC:
+            /*
+            if cursor at end of current line and not on the last line of the
+            file
+             - append next line onto the end of the current line
+             - delete next line
+            */
             if(x == buff->lines[y+scrolly].length() && y+scrolly != buff->lines.size() - 1) {
                 buff->lines[y+scrolly] += buff->lines[y+scrolly+1];
                 deleteLine(y+scrolly+1);
                 modified = true;
             }
+            /*
+            otherwise
+             - delete the xth character in the current line (i.e. delete the
+                character after the cursor)
+            */
             else {
                 buff->lines[y+scrolly].erase(x, 1);
                 modified = true;
             }
             break;
+        /*
+        when enter pressed...
+        */
         case KEY_ENTER:
         case 10:
+            /*
+            if cursor not at the end of the line
+             - insert a new line below, with the section of the current line
+                from the cursor to the end
+             - erase all of the current line after the cursor
+             so basically, move the part of the line after the cursor to a new
+             line below
+            */
             if(x < buff->lines[y+scrolly].length()) {
                 buff->insertLine(buff->lines[y+scrolly].substr(x, buff->lines[y+scrolly].length() - x), y + scrolly + 1);
                 buff->lines[y+scrolly].erase(x, buff->lines[y+scrolly].length() - x);
                 modified = true;
             }
+            /*
+            if the cursor IS at the end of the line
+             - just insert a blank line below
+            */
             else {
                 buff->insertLine("", y+scrolly+1);
                 modified = true;
             }
+            // always when enter pressed move cursor to the beginning of the
+            // line
             x = 0;
             moveDown();
             break;
+        /*
+        all different keys for tab...
+        probably will be 9, but worth putting in the other ones
+        */
         case KEY_BTAB:
         case KEY_CTAB:
         case KEY_STAB:
         case KEY_CATAB:
         case 9:
+            /*
+            since eddy uses 4 spaces instead of tabs,
+            insert 4 spaces at the cursor and move cursor forward to
+            the end of those spaces
+            */
             buff->lines[y+scrolly].insert(x, 4, ' ');
             x += 4;
             modified = true;
@@ -226,6 +319,25 @@ void Editor::handleInput(int c) {
             x++;
             modified = true;
             break;
+        case '}':
+            if (buff->lines[y+scrolly][x] != '}') {
+                buff->lines[y+scrolly].insert(x, "}");
+            }
+            x++;
+            break;
+        case ')':
+            if (buff->lines[y+scrolly][x] != ')') {
+                buff->lines[y+scrolly].insert(x, ")");
+            }
+            x++;
+            break;
+        case ']':
+            if (buff->lines[y+scrolly][x] != ']') {
+                buff->lines[y+scrolly].insert(x, "]");
+            }
+            x++;
+            break;
+
         default:
             buff->lines[y+scrolly].insert(x, 1, char(c));
             x++;
