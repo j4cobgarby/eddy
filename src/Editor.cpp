@@ -68,6 +68,7 @@ void Editor::updateStatus() {
     if (modified) {
         status += "*";
     }
+    status += "\t" + currentLang;
 }
 
 void Editor::handleInput(int c) {
