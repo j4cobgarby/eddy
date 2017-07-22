@@ -56,6 +56,9 @@ public:
     void updateStatus();
 
     istream& safeGetline(istream&, string&);
+
+    vector<Language> langs;
+    Language current_lang;
 };
 
 #endif
