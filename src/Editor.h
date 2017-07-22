@@ -10,6 +10,7 @@
 #include <sstream>
 
 #include "Buffer.h"
+#include "Language.h"
 
 class Editor
 {
@@ -55,7 +56,7 @@ private:
 
     void    set_current_lang();
 
-    string  currentLang;
+    Language  currentLang;
 public:
     Editor();
     Editor(string);

@@ -456,7 +456,7 @@ void Editor::printBuff(WINDOW * win) {
                 etc...
         }
     */
-
+/*
     if (currentLang == "" || currentLang == "text" || currentLang == "plaintext")
         return;
 
@@ -497,7 +497,7 @@ void Editor::printBuff(WINDOW * win) {
         int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
         mvwprintw(win, y_index, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
         wattroff(win, COLOR_PAIR(match.second.second) | A_BOLD);
-    }
+    }*/
 }
 
 void Editor::printStatusLine(WINDOW * win) {
