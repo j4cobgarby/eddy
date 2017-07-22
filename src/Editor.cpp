@@ -1,10 +1,6 @@
 #include "Editor.h"
 #include "Widgets.h"
 
-#include <fstream>
-#include <iostream>
-#include <sstream>
-
 using namespace std;
 
 Editor::Editor() {
@@ -33,17 +29,16 @@ Editor::Editor(string fn) {
 
     buff = new Buffer();
 
-    fstream infile(fn.c_str());
-    if(infile.is_open()) {
-        while(!infile.eof()) {
-            string temp;
-            getline(infile, temp);
-            buff->appendLine(temp);
-        }
-    }
-    else {
+    ifstream infile(fn.c_str());
+
+    if (!infile) {
         cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
         buff->appendLine("");
+    } else {
+        int n = 0;
+        string temp;
+        while (!safeGetline(infile, temp).eof())
+            buff->appendLine(temp);
     }
 }
 
@@ -221,6 +216,17 @@ void Editor::handleInput(int c) {
             x++;
             modified = true;
             break;
+        case ']':
+        case ')':
+        case '}':
+            if (buff->lines[y+scrolly][x] != c) {
+                buff->lines[y+scrolly].insert(x, 1, char(c));
+                x++;
+                modified = true;
+            } else {
+              x++;
+            }
+            break;
         default:
             buff->lines[y+scrolly].insert(x, 1, char(c));
             x++;
@@ -368,23 +374,21 @@ void Editor::openFile(string fn) {
 
     buff = new Buffer();
 
-    fstream infile(fn.c_str());
-    if(infile.is_open()) {
-        while(!infile.eof()) {
-            string temp;
-            getline(infile, temp);
-            buff->appendLine(temp);
-        }
-    }
-    else {
+    ifstream infile(fn.c_str());
+
+    if (!infile) {
         showDialog("Error", {
             "The file you specified doesn't",
             "exist."
         }, 35);
-        cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
         buff->appendLine("");
         isnewfile = true;
         filename = "untitled";
+    } else {
+        int n = 0;
+        string temp;
+        while (!safeGetline(infile, temp).eof())
+            buff->appendLine(temp);
     }
 }
 

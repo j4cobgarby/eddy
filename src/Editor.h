@@ -3,6 +3,9 @@
 
 #include <ncurses.h>
 #include <regex>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 
 #include "Buffer.h"
 
@@ -51,6 +54,8 @@ public:
     void printBuff(WINDOW * win);
     void printStatusLine(WINDOW * win);
     void updateStatus();
+
+    istream& safeGetline(istream&, string&);
 };
 
 #endif
