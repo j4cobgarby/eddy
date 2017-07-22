@@ -10,35 +10,6 @@ string Buffer::remTabs(string line) {
         return remTabs(line.replace(tab, 1, "    "));
 }
 
-string Buffer::toString(int start_index, int end_index) {
-    vector<string>::const_iterator first = lines.begin() + start_index;
-    vector<string>::const_iterator last = lines.begin() + end_index;
-    vector<string> lines_section(first, last);
-
-    string result;
-    for (string &line : lines_section) {
-      result += line;
-      result += "\n";
-    }
-    // Note the result has a trailing newline
-    return result;
-}
-
-int Buffer::yIndexFromIndexInString(int index, string s) {
-    string before_index = s.substr(0, index);
-    int yindex = 0;
-    for (int i = 0; i < before_index.length(); i++) {
-      if (before_index[i] == '\n') yindex++;
-    }
-    return yindex;
-}
-
-int Buffer::xIndexFromIndexInString(int index, string s) {
-    string before_index = s.substr(0, index);
-    size_t last_newline = before_index.find_last_of("\n");
-    return before_index.length() - last_newline;
-}
-
 void Buffer::insertLine(string line, int n) {
     line = remTabs(line);
     lines.insert(lines.begin()+n, line);

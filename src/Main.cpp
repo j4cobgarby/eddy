@@ -40,19 +40,12 @@ void curses_init()
     init_pair(2, COLOR_WHITE, COLOR_BLUE); // insert
     init_pair(3, COLOR_BLUE, COLOR_WHITE); // normal
 
-    init_pair(4, COLOR_RED, COLOR_BLACK); // number
-    init_pair(5, COLOR_GREEN, COLOR_BLACK); // string
-    init_pair(6, COLOR_BLUE, COLOR_BLACK); // keyword
-    init_pair(7, COLOR_CYAN, COLOR_BLACK); // operator
-    init_pair(8, COLOR_MAGENTA, COLOR_BLACK); // function
-    init_pair(0, COLOR_BLACK, COLOR_BLACK);
-
     // The window for the title of eddy, at the top
     title_win = newwin(1, COLS, 0, 0);
     // set colour of window - white bg
     wbkgd(title_win, COLOR_PAIR(1));
     // add a title
-    wprintw(title_win, "\teddy v1.1");
+    wprintw(title_win, "\teddy v0.9 beta");
     // display title
     wrefresh(title_win);
 
@@ -73,8 +66,8 @@ void curses_init()
 
     // Splash dialog
 
-    showDialog("eddy v1.1", {
-        "Hello! Welcome!",
+    showDialog("eddy v0.9-beta", {
+        "Hello! Welcome to eddy v0.4b!",
         "",
         "Keep in mind it's in beta, so",
         "you should expect issues. If",
@@ -103,8 +96,6 @@ int main(int argc, char* argv[])
     {
         ed = Editor();
     }
-
-    ed.initLangs();
 
     // call the function to make windows, etc.
     curses_init();

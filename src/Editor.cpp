@@ -1,11 +1,12 @@
 #include "Editor.h"
 #include "Widgets.h"
-using namespace std; // test
 
-/*
-This constructor is used when no filename is given as a command line
-argument
-*/
+#include <fstream>
+#include <iostream>
+#include <sstream>
+
+using namespace std;
+
 Editor::Editor() {
     x = 0; y = 0;
     scrolly = 0;
@@ -18,14 +19,8 @@ Editor::Editor() {
 
     buff = new Buffer();
     buff->appendLine("");
-
-    currentLang = "";
 }
 
-/*
-This constructor is used when a filename is given as a command line
-argument.
-*/
 Editor::Editor(string fn) {
     x = 0; y = 0;
     scrolly = 0;
@@ -38,30 +33,20 @@ Editor::Editor(string fn) {
 
     buff = new Buffer();
 
-    openFile(fn);
-
-    currentLang = "";
+    fstream infile(fn.c_str());
+    if(infile.is_open()) {
+        while(!infile.eof()) {
+            string temp;
+            getline(infile, temp);
+            buff->appendLine(temp);
+        }
+    }
+    else {
+        cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
+        buff->appendLine("");
+    }
 }
 
-/*
-This gets the file extension of a file, by finding the index
-of the last '.', and then returning the substring between that
-index and the end of the string.
-cases:
-main.py => py
-hello.world.foo.bar => bar
-*/
-string Editor::get_file_extension(string path) {
-    size_t last_dot_pos = path.rfind(".");
-    return path.substr(last_dot_pos+1, path.length());
-}
-
-/*
-Updates the 'status' variable. This is used to define what content
-is shown at the status bar.
-This could be optimised by only being called when the value would be
-different
-*/
 void Editor::updateStatus() {
     status = "";
     switch(mode) {
@@ -79,7 +64,6 @@ void Editor::updateStatus() {
     if (modified) {
         status += "*";
     }
-    status += "\t" + currentLang;
 }
 
 void Editor::handleInput(int c) {
@@ -98,9 +82,6 @@ void Editor::handleInput(int c) {
         return;
     }
     switch(mode) {
-    /*
-    If in normal mode...
-    */
     case 'n':
         switch(c) {
         case ']':
@@ -118,10 +99,6 @@ void Editor::handleInput(int c) {
         case 'x':
             if (modified) {
                 if (isnewfile) {
-                    /*
-                    If they've made a new file, and modified it, they'll
-                    be asked what they want to call it.
-                    */
                     filename = getDialogInput("Save", {
                         "Don't forget to name your file!",
                         "You're currently editing an untitled",
@@ -135,7 +112,6 @@ void Editor::handleInput(int c) {
             mode = 'x';
             break;
         case 'i':
-            // Mode i = insert
             mode = 'i';
             break;
         case 's':
@@ -153,11 +129,6 @@ void Editor::handleInput(int c) {
         case 'f':
             {
                 {
-                    /*
-                    Use a regex to replace all bits of the buffer matching
-                    a given regex with the replace field
-                    it also has a nice little dialog
-                    */
                     vector<string> fields = getFindReplaceFields();
                     string find_field = fields.at(0);
                     string replace_field = fields.at(1);
@@ -171,18 +142,13 @@ void Editor::handleInput(int c) {
             openFile(getDialogInput("Open", {
                 "Type a file path"
             }, 40));
-            set_current_lang();
             break;
         case 'O':
             {
-                vector<string> fields = getOpenURLFields();
-                // create a command to run with system(), to download a file
-                // from the internet and put it at a given path
-                string wget = "wget -O "+fields.at(1)+" "+fields.at(0);
-                system(wget.c_str());
-                // open given path, which is where the downloaded file is
-                openFile(fields.at(1));
-                set_current_lang();
+              vector<string> fields = getOpenURLFields();
+              string wget = "wget -O "+fields.at(1)+" "+fields.at(0);
+              system(wget.c_str());
+              openFile(fields.at(1));
             }
         }
         break;
@@ -193,17 +159,7 @@ void Editor::handleInput(int c) {
             break;
         case 127:
         case KEY_BACKSPACE:
-            /*
-            do nothing if they're at the beginning of the file
-            */
             if (x == 0 && y+scrolly == 0) break;
-            /*
-            if they're at the beginning of a line, but NOT the first line,
-            then
-             - move to the end of the previous line
-             - delete the line which backspace was pressed on
-             - move the cursor up to the correct line
-            */
             if (x == 0 && y+scrolly > 0) {
                 x = buff->lines[y+scrolly-1].length();
                 buff->lines[y+scrolly-1] += buff->lines[y+scrolly];
@@ -211,94 +167,41 @@ void Editor::handleInput(int c) {
                 moveUp();
                 modified = true;
             }
-            /*
-            if they're not at the beginning of a line
-             - decrement x and remove the xth character from the line
-            */
             else {
-                try {
-                    char next_char = buff->lines[y+scrolly][x];
-                    if (next_char != '}' && next_char != ')' && next_char != ']') {
-                        buff->lines[y+scrolly].erase(--x, 1);
-                    } else {
-                        buff->lines[y+scrolly].erase(--x, 2);
-                    }
-                } catch (exception e) {
-                    buff->lines[y+scrolly].erase(--x, 1);
-                }
+                buff->lines[y+scrolly].erase(--x, 1);
                 modified = true;
             }
             break;
-        /*
-        delete pressed
-        */
         case KEY_DC:
-            /*
-            if cursor at end of current line and not on the last line of the
-            file
-             - append next line onto the end of the current line
-             - delete next line
-            */
             if(x == buff->lines[y+scrolly].length() && y+scrolly != buff->lines.size() - 1) {
                 buff->lines[y+scrolly] += buff->lines[y+scrolly+1];
                 deleteLine(y+scrolly+1);
                 modified = true;
             }
-            /*
-            otherwise
-             - delete the xth character in the current line (i.e. delete the
-                character after the cursor)
-            */
             else {
                 buff->lines[y+scrolly].erase(x, 1);
                 modified = true;
             }
             break;
-        /*
-        when enter pressed...
-        */
         case KEY_ENTER:
         case 10:
-            /*
-            if cursor not at the end of the line
-             - insert a new line below, with the section of the current line
-                from the cursor to the end
-             - erase all of the current line after the cursor
-             so basically, move the part of the line after the cursor to a new
-             line below
-            */
             if(x < buff->lines[y+scrolly].length()) {
                 buff->insertLine(buff->lines[y+scrolly].substr(x, buff->lines[y+scrolly].length() - x), y + scrolly + 1);
                 buff->lines[y+scrolly].erase(x, buff->lines[y+scrolly].length() - x);
                 modified = true;
             }
-            /*
-            if the cursor IS at the end of the line
-             - just insert a blank line below
-            */
             else {
                 buff->insertLine("", y+scrolly+1);
                 modified = true;
             }
-            // always when enter pressed move cursor to the beginning of the
-            // line
             x = 0;
             moveDown();
             break;
-        /*
-        all different keys for tab...
-        probably will be 9, but worth putting in the other ones
-        */
         case KEY_BTAB:
         case KEY_CTAB:
         case KEY_STAB:
         case KEY_CATAB:
         case 9:
-            /*
-            since eddy uses 4 spaces instead of tabs,
-            insert 4 spaces at the cursor and move cursor forward to
-            the end of those spaces
-            */
             buff->lines[y+scrolly].insert(x, 4, ' ');
             x += 4;
             modified = true;
@@ -318,25 +221,6 @@ void Editor::handleInput(int c) {
             x++;
             modified = true;
             break;
-        case '}':
-            if (buff->lines[y+scrolly][x] != '}') {
-                buff->lines[y+scrolly].insert(x, "}");
-            }
-            x++;
-            break;
-        case ')':
-            if (buff->lines[y+scrolly][x] != ')') {
-                buff->lines[y+scrolly].insert(x, ")");
-            }
-            x++;
-            break;
-        case ']':
-            if (buff->lines[y+scrolly][x] != ']') {
-                buff->lines[y+scrolly].insert(x, "]");
-            }
-            x++;
-            break;
-
         default:
             buff->lines[y+scrolly].insert(x, 1, char(c));
             x++;
@@ -386,21 +270,20 @@ void Editor::moveUp() {
     }
     if(y+scrolly-1 >= 0)
         y--;
-    if(x >= buff->lines[y+scrolly].length())
-        x = buff->lines[y+scrolly].length();
+    if(x >= buff->lines[y].length())
+        x = buff->lines[y].length();
     move(y, x);
 }
 
 void Editor::moveDown() {
-    // auto scroll
     if (y > LINES-(3 + 4)) {
         scrollDown();
         return;
     }
-    if(y+scrolly+1 < LINES && y+scrolly+1 < buff->lines.size())
+    if(y+1 < LINES && y+1 < buff->lines.size())
         y++;
-    if(x >= buff->lines[y+scrolly].length())
-        x = buff->lines[y+scrolly].length();
+    if(x >= buff->lines[y].length())
+        x = buff->lines[y].length();
     move(y, x);
 }
 
@@ -408,7 +291,7 @@ int Editor::digits_in_num(int n) {
     return to_string(n).length();
 }
 
-// amount of digits in greatest number
+// longest by digits
 int Editor::longest_line_number(vector<string> vec) {
     return digits_in_num(vec.size());
 }
@@ -429,75 +312,13 @@ void Editor::printBuff(WINDOW * win) {
                 wattron(win, col_pair);
                 mvwprintw(win, i, 0, to_string(i + scrolly + 1).c_str());
                 wattroff(win, col_pair);
-                mvwprintw(win, i, longest_ln_number+2, (buff->lines.at(i + scrolly).substr(0, COLS-(longest_ln_number+1))).c_str());
+                mvwprintw(win, i, longest_ln_number+2, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
             } catch (out_of_range oor) {}
         }
         wclrtoeol(win);
     }
-    // Move the cursor to the correct location so that the user knows what
-    // they're editing
+    // Move to the actual place where the cursor is
     move(y+1, x+longest_ln_number+2);
-
-    /*
-    Now for syntax highlighting
-    The basic idea is this:
-     - iterate all the language definition regex for the currently selected
-        language.
-     - put all of the matches, in a pair with their colour, all in a pair with
-        its index, in a vector
-     - should get something like:
-
-        vector<pair<int, pair<string, int>>>
-        a vector of pairs of ints and pairs of strings and ints
-
-        {
-            {0, ["print", 4]},
-            {6, ["\"Hello, world!\"", 4]},
-                etc...
-        }
-    */
-/*
-    if (currentLang == "" || currentLang == "text" || currentLang == "plaintext")
-        return;
-
-    string buffer_string = buff->toString(scrolly, scrolly+(LINES - 2));
-    vector<pair<int, pair<string, int>>> matches;
-    for (pair<string, string> type : langs[currentLang]) {
-        // type.second is each regex
-
-        regex r(type.second);
-
-        for (sregex_iterator i = sregex_iterator(buffer_string.begin(), buffer_string.end(), r);
-            i != sregex_iterator();
-            ++i)
-        {
-            pair<int, pair<string, int>> p;
-            smatch m = *i;
-            if (m[0].matched) {
-                p.first = m.position(0);
-                p.second.first = m[0].str();
-                // default colour
-                //p.second.second = 4;
-
-                if (type.first == "comment") p.second.second = 9;
-                else if (type.first == "number") p.second.second = 4;
-                else if (type.first == "string") p.second.second = 5;
-                else if (type.first == "keyword") p.second.second = 6;
-                else if (type.first == "operator") p.second.second = 7;
-                else if (type.first == "function") p.second.second = 8;
-
-                matches.push_back(p);
-            }
-        }
-    }
-
-    // first -> last in matches
-    for (pair<int, pair<string, int>> match : matches) {
-        wattron(win, COLOR_PAIR(match.second.second) | A_BOLD);
-        int y_index = buff->yIndexFromIndexInString(match.first, buffer_string);
-        mvwprintw(win, y_index, buff->xIndexFromIndexInString(match.first, buffer_string)+longest_ln_number+1, match.second.first.c_str());
-        wattroff(win, COLOR_PAIR(match.second.second) | A_BOLD);
-    }*/
 }
 
 void Editor::printStatusLine(WINDOW * win) {
@@ -547,21 +368,23 @@ void Editor::openFile(string fn) {
 
     buff = new Buffer();
 
-    ifstream infile(fn.c_str());
-
-    if (!infile) {
+    fstream infile(fn.c_str());
+    if(infile.is_open()) {
+        while(!infile.eof()) {
+            string temp;
+            getline(infile, temp);
+            buff->appendLine(temp);
+        }
+    }
+    else {
         showDialog("Error", {
             "The file you specified doesn't",
             "exist."
         }, 35);
+        cerr << "The file you specified doesn't exist: '" << fn << "'.\n";
         buff->appendLine("");
         isnewfile = true;
         filename = "untitled";
-    } else {
-        int n = 0;
-        string temp;
-        while (!safeGetline(infile, temp).eof())
-            buff->appendLine(temp);
     }
 }
 

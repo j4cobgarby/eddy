@@ -8,18 +8,6 @@ If you simply want to quickly have a look at eddy, you can download the most rec
 
 Want to develop or test eddy? Follow these instructions to do so!
 
-### Quick version
-
-If you can't be bothered to follow the full instructions, try this. It'll probably work.
-
-```
-sudo apt-get install libncurses5-dev libncursesw5-dev
-git clone https://github.com/j4cobgarby/eddy
-cd eddy
-make
-./eddy
-```
-
 ### Prerequisites
 
  - Preferrably UNIX like OS (e.g. Linux, MacOS, **However, Windows users can use this too, with extra steps**)

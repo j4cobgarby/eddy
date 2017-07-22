@@ -3,14 +3,8 @@
 
 #include <ncurses.h>
 #include <regex>
-#include <map>
-#include <vector>
-#include <fstream>
-#include <iostream>
-#include <sstream>
 
 #include "Buffer.h"
-#include "Language.h"
 
 class Editor
 {
@@ -25,12 +19,6 @@ private:
     Buffer* buff;
 
     string  status, filename;
-
-    // access like langs[language][lexeme type]
-    // e.g. langs[python][string]
-    // would return the regex to find strings in
-    // a python file
-    map<string, map<string, string>> langs;
 
     void    moveUp();
     void    moveDown();
@@ -53,28 +41,16 @@ private:
 
     int     digits_in_num(int);
     int     longest_line_number(vector<string>);
-
-    void    set_current_lang();
-
-    Language  currentLang;
 public:
     Editor();
     Editor(string);
 
-    void initLangs();
-
     char getMode() {return mode;}
-
-    map<string, vector<string>> file_extension_to_lang;
 
     void handleInput(int);
     void printBuff(WINDOW * win);
     void printStatusLine(WINDOW * win);
     void updateStatus();
-
-    string get_file_extension(string);
-
-    istream& safeGetline(istream&, string&);
 };
 
 #endif
