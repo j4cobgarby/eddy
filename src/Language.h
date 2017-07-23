@@ -11,6 +11,7 @@ using namespace std;
 class Language {
 public:
   Language(string, vector<string>, map<string, map<int, int>>);
+  Language();
 
   string lang_name;
   vector<string> file_extensions;

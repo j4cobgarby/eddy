@@ -7,7 +7,6 @@ string Buffer::remTabs(string line) {
     if(tab == line.npos)
         return line;
     else
-        return remTabs(line.replace(tab, 1, "    "));
 }
 
 void Buffer::insertLine(string line, int n) {
@@ -22,4 +21,12 @@ void Buffer::appendLine(string line) {
 
 void Buffer::removeLine(int n) {
     lines.erase(lines.begin()+n);
+}
+
+string Buffer::toString() {
+    string out;
+    for (string ln : lines) {
+        out += ln += "\n";
+    }
+    return out;
 }

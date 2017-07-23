@@ -6,6 +6,7 @@
 
 #include "Editor.h"
 #include "Widgets.h"
+#include "Language.h"
 
 using namespace std;
 
@@ -81,6 +82,13 @@ int main(int argc, char* argv[])
 {
     // The editor. This handles input and stuff
     Editor ed;
+
+    map<string, map<int, int>> testmap {
+      {"(test|foo|bar)", {{0, 0}}}
+    };
+    Language testlang ("test", vector<string>{"test", "t"}, testmap);
+    ed.langs.push_back(testlang);
+
     // local filename, to be set as the actual filename later
     string fn = "";
 

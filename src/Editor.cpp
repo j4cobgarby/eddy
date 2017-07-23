@@ -325,6 +325,13 @@ void Editor::printBuff(WINDOW * win) {
     }
     // Move to the actual place where the cursor is
     move(y+1, x+longest_ln_number+2);
+
+    //string buffer_string = buff->toString();
+    //vector<pair<int, pair<string, int>>> matches;
+
+    //for (pair<string, map<int, int>> syntax_part : langs) {
+
+    //}
 }
 
 void Editor::printStatusLine(WINDOW * win) {

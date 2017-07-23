@@ -8,6 +8,7 @@
 #include <sstream>
 
 #include "Buffer.h"
+#include "Language.h"
 
 class Editor
 {

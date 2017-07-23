@@ -18,6 +18,7 @@ public:
     void removeLine(int);
 
     string remTabs(string);
+    string toString();
 };
 
 #endif

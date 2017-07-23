@@ -5,3 +5,7 @@ Language::Language(string lang_name, vector<string> file_extensions, map<string,
   this->file_extensions = file_extensions;
   this->regexes = regexes;
 }
+
+Language::Language() {
+  lang_name = "text";
+}
