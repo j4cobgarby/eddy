@@ -7,6 +7,7 @@ string Buffer::remTabs(string line) {
     if(tab == line.npos)
         return line;
     else
+        return remTabs(line.replace(tab, 1, string(4, ' ')));
 }
 
 void Buffer::insertLine(string line, int n) {
