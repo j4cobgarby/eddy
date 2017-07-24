@@ -384,7 +384,7 @@ void Editor::openFile(string fn) {
     ifstream infile(fn.c_str());
 
     if (!infile) {
-        showDialog("Error", {
+        showConfirmDialog("Error", {
             "The file you specified doesn't",
             "exist."
         }, 35);

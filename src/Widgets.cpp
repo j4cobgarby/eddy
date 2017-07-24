@@ -1,6 +1,6 @@
 #include "Widgets.h"
 
-void showDialog(string title, vector<string> body, int width) {
+bool showConfirmDialog(string title, vector<string> body, int width) {
     string input;
 
     // Calculate height based on
@@ -14,7 +14,21 @@ void showDialog(string title, vector<string> body, int width) {
     // Make window in center of screen
     WINDOW * dia = newwin(height, width, (LINES - height) / 2, (COLS - width) / 2);
     // Write message at bottom
-    mvwprintw(dia, height - 2, 2, "[ENTER] to continue");
+
+    // Yes      No
+
+    wattron(dia, A_BOLD);
+    mvwaddstr(dia, height-2, 4, "[y]");
+    wattroff(dia, A_BOLD);
+
+    wprintw(dia, "es");
+    wprintw(dia, string(5, ' ').c_str());
+
+    wattron(dia, A_BOLD);
+    waddstr(dia, "[n]");
+    wattroff(dia, A_BOLD);
+
+    wprintw(dia, "o");
     // default border
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
@@ -29,10 +43,10 @@ void showDialog(string title, vector<string> body, int width) {
     wrefresh(dia);
     redrawwin(dia);
     int d_c;
-    while (((d_c = getch()) != KEY_ENTER) && d_c != 10) {
-    }
+    while (d_c = getch() != 'y' && d_c != 'Y' && d_c != 'n' && d_c != 'N') {}
     delwin(dia);
-    return;
+    if (d_c == 'n' || d_c == 'N') return false;
+    return true;
 }
 
 string getDialogInput(string title, vector<string> body, int width) {

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void             showDialog           (string, vector<string>, int);
+bool             showConfirmDialog    (string, vector<string>, int);
 string           getDialogInput       (string, vector<string>, int);
 vector<string>   getFindReplaceFields ();
 vector<string>   getOpenURLFields     ();
