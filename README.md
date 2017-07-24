@@ -35,6 +35,8 @@ sudo apt-get install g++
 
 #### Windows
 
+If running eddy on windows, it'd be a good idea to _not use cmd_, since some bits (such as dialog boxes) don't work particularly well with it. Use a third party terminal emulator - I'd suggest [Hyper.js](https://hyper.is) since it looks pretty, but an emulator with more features is [Cmder](http://cmder.net).
+
 The best way to get started on Windows is by installing the Windows subsystem for Linux. Basically this is
 a way of opening up an ubuntu shell in Windows! You can find out more about that
 [here](https://msdn.microsoft.com/en-gb/commandline/wsl/install_guide), but
