@@ -33,7 +33,9 @@ bool showConfirmDialog(string title, vector<string> body, int width) {
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print title in center
+    wattron(dia, A_BOLD|A_UNDERLINE);
     mvwprintw(dia, 1, (width - title.length()) / 2, title.c_str());
+    wattroff(dia, A_BOLD|A_UNDERLINE);
 
     int i = 0;
     for (auto const& ln: body) { i++;
@@ -43,10 +45,53 @@ bool showConfirmDialog(string title, vector<string> body, int width) {
     wrefresh(dia);
     redrawwin(dia);
     int d_c;
-    while (d_c = getch() != 'y' && d_c != 'Y' && d_c != 'n' && d_c != 'N') {}
+    while (d_c = getch() != 'y' && d_c != 'n') {}
     delwin(dia);
     if (d_c == 'n' || d_c == 'N') return false;
     return true;
+}
+
+void showInfoDialog(vector<string> body, int width) {
+    string input;
+
+    // Calculate height based on
+    // top and bottom border = 2
+    // + title = 3
+    // + text at bottom = 4
+    // + blank spaces = 6
+    // + amount of lines in body
+    int height = 6 + body.size();
+
+    // Make window in center of screen
+    WINDOW * dia = newwin(height, width, (LINES - height) / 2, (COLS - width) / 2);
+    // Write message at bottom
+
+    mvwaddstr(dia, height-2, 4, "Press ");
+
+    wattron(dia, A_BOLD);
+    waddstr(dia, "[Any key]");
+    wattroff(dia, A_BOLD);
+
+    waddstr(dia, " to continue");
+
+    wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
+
+    // print title in center
+    wattron(dia, A_BOLD|A_UNDERLINE);
+    mvwprintw(dia, 1, 2, "Info");
+    wattroff(dia, A_BOLD|A_UNDERLINE);
+
+    int i = 0;
+    for (auto const& ln: body) { i++;
+        mvwprintw(dia, 2 + i, 3, ln.c_str());
+    }
+
+    wrefresh(dia);
+    redrawwin(dia);
+    int d_c;
+    d_c = getch();
+    delwin(dia);
+    return;
 }
 
 string getDialogInput(string title, vector<string> body, int width) {
@@ -71,7 +116,9 @@ string getDialogInput(string title, vector<string> body, int width) {
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print title string
+    wattron(dia, A_BOLD|A_UNDERLINE);
     mvwprintw(dia, 1, (width - title.length()) / 2, title.c_str());
+    wattroff(dia, A_BOLD|A_UNDERLINE);
 
     // iterate body vector and print each line in it
     int i = 0;
@@ -170,7 +217,9 @@ vector<string> getFindReplaceFields() {
     wborder(dia, 0, 0, 0, 0, 0, 0, 0, 0);
 
     // print title in center
+    wattron(dia, A_BOLD|A_UNDERLINE);
     mvwprintw(dia, 1, (width - title.length()) / 2, title.c_str());
+    wattroff(dia, A_BOLD|A_UNDERLINE);
 
     mvwprintw(dia, 3, 3, "Find (regex)");
     mvwprintw(dia, 6, 3, "Replace");

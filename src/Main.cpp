@@ -67,7 +67,7 @@ void curses_init()
 
     // Splash dialog
 
-    showConfirmDialog("eddy v1.2", {
+    showInfoDialog({
         "Hello! Welcome to eddy v0.4b!",
         "",
         "Keep in mind it's in beta, so",
