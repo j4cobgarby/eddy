@@ -32,6 +32,9 @@ private:
     void    scrollDown();
     void    scrollUp();
 
+    void    scrollRight();
+    void    scrollLeft();
+
     void    scrollDown(int);
     void    scrollUp(int);
 
