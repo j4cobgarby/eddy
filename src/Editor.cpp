@@ -264,7 +264,7 @@ void Editor::scrollUp() {
 void Editor::scrollDown() {
   scrollDown(1);
 }
-///////////////////////////////////To scroll right till the longest line length
+///////////////////////////////////To scroll left and right
 void Editor::scrollRight() {
 scrollx += 1;
 x += 1;
