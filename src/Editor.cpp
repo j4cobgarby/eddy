@@ -91,6 +91,12 @@ void Editor::handleInput(int c) {
         case '{':
             scrollUp(10);
             break;
+        case '>':
+            scrollRight();
+            break;
+        case '<':
+            scrollLeft();
+            break;
         case 'x':
             if (modified) {
                 if (isnewfile) {
@@ -256,9 +262,25 @@ void Editor::scrollUp() {
 }
 
 void Editor::scrollDown() {
-    scrollDown(1);
+  scrollDown(1);
+}
+///////////////////////////////////To scroll right till the longest line length
+void Editor::scrollRight() {
+scrollx += 1;
+x += 1;
+if(scrollx > buff->lines[y+scrolly].length()  ) {scrollx = buff->lines[y+scrolly].length();  }
+if(x > buff->lines[y+scrolly].length() ) {x = buff->lines[y+scrolly].length(); }
+// printw("->%d\n",x);
+
 }
 
+void Editor::scrollLeft() {
+scrollx -= 1;
+x -= 1;
+if(scrollx < 0 ) scrollx = 0;
+if(x<0) x = 0;
+}
+////////////////////////////////////////////////////////////////////////////////
 void Editor::scrollUp(int amount) {
     scrolly -= amount;
     if (scrolly < 0) scrolly = 0;
@@ -318,13 +340,13 @@ void Editor::printBuff(WINDOW * win) {
                 wattron(win, col_pair);
                 mvwprintw(win, i, 0, to_string(i + scrolly + 1).c_str());
                 wattroff(win, col_pair);
-                mvwprintw(win, i, longest_ln_number+2, (buff->lines.at(i + scrolly).substr(0, COLS)).c_str());
+                mvwprintw(win, i, longest_ln_number+2, (buff->lines.at(i + scrolly).substr(scrollx, COLS)).c_str());
             } catch (out_of_range oor) {}
         }
         wclrtoeol(win);
     }
     // Move to the actual place where the cursor is
-    move(y+1, x+longest_ln_number+2);
+    move(y+1, x+longest_ln_number+2 -scrollx );
 
     //string buffer_string = buff->toString();
     //vector<pair<int, pair<string, int>>> matches;
