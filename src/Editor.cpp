@@ -112,6 +112,7 @@ void Editor::handleInput(int c) {
             scrollLeft();
             break;
         case 'x':
+        case 'q':
             if (modified) {
                 if (isnewfile) {
                     filename = getDialogInput("Save", {
