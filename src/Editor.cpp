@@ -79,6 +79,20 @@ void Editor::handleInput(int c) {
     switch(mode) {
     case 'n':
         switch(c) {
+        // hjkl movement
+        case 'h':
+            moveLeft();
+            return;
+        case 'l':
+            moveRight();
+            return;
+        case 'k':
+            moveUp();
+            return;
+        case 'j':
+            moveDown();
+            return;
+        // hjkl movement
         case ']':
             scrollDown();
             break;

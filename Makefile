@@ -19,13 +19,13 @@ clean:
 	rm -f $(EXE)
 
 $(EXE): $(OBJDIR) $(OBJ)
-	$(LD) $(OBJ) $(LDFLAGS) -std=c++14 -o $@
+	$(LD) $(OBJ) $(LDFLAGS) -std=c++17 -o $@
 
 $(OBJDIR):
 	mkdir $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CXX) $(CXXFLAGS) -std=c++14 $< -o $@
+	$(CXX) $(CXXFLAGS) -std=c++17 $< -o $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(SRCDIR)/%.h
-	$(CXX) $(CXXFLAGS) -std=c++14 $< -o $@
+	$(CXX) $(CXXFLAGS) -std=c++17 $< -o $@

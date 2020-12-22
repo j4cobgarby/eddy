@@ -1,10 +1,8 @@
-#ifndef EDITOR_H
-#define EDITOR_H
+#pragma once
 
 #include <ncurses.h>
 #include <regex>
 #include <fstream>
-#include <iostream>
 #include <sstream>
 
 #include "Buffer.h"
@@ -64,5 +62,3 @@ public:
     vector<Language> langs;
     Language current_lang;
 };
-
-#endif
