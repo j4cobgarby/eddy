@@ -10,7 +10,8 @@ SRC := $(wildcard $(SRCDIR)/*.cpp)
 OBJ := $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(SRC))
 EXE := eddytion
 
-.PHONY: all clean
+install: all
+	cp $(EXE) /usr/local/bin/
 
 all: $(EXE)
 
