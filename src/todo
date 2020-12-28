@@ -1,2 +1,9 @@
-syntax highlighting   the highlight saga
-save warning
+1. syntax highlighting 
+
+2. completion engine
+
+3. split screen
+
+4. multi-file editing
+
+5. fix weird bug where if you save with no name, it just saves it as untitled.

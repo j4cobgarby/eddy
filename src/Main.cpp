@@ -1,9 +1,3 @@
-#include <ncurses.h>
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-
 #include "Editor.h"
 #include "Widgets.h"
 #include "Language.h"
@@ -46,7 +40,7 @@ void curses_init()
     // set colour of window - white bg
     wbkgd(title_win, COLOR_PAIR(1));
     // add a title
-    wprintw(title_win, "\teddy v1.2");
+    wprintw(title_win, "\teddytion v0.1b");
     // display title
     wrefresh(title_win);
 
@@ -68,14 +62,14 @@ void curses_init()
     // Splash dialog
 
     showInfoDialog({
-        "Hello! Welcome to eddy v0.4b!",
+        "Hello! Welcome to eddytion v0.1b!",
         "",
         "Keep in mind it's in beta, so",
         "you should expect issues. If",
         "you do encounter any, it would",
         "really help to report them on",
         "the Github repository."
-    }, 36);
+    }, 37);
 }
 
 int main(int argc, char* argv[])
@@ -120,6 +114,12 @@ int main(int argc, char* argv[])
         int input = getch();
         ed.handleInput(input);
     }
+
+    delwin(editor_win);
+
+    showConfirmDialog("Quit?", {
+            "Do you really want to quit?",
+         }, 32);
 
     // refresh and exit once the mode is 'x'
     refresh();
