@@ -19,7 +19,7 @@ git clone https://github.com/honestly-nuts/eddytion.git
 #### Then cd into the repository and build the app with:
 ```bash
 cd eddytion
-make install
+sudo make install
 ```
 
 #### Now you are good to go.
