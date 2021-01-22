@@ -1,0 +1,2 @@
+done: dialog prompt when existing
+split screen

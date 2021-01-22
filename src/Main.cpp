@@ -97,7 +97,7 @@ int main(int argc, char* argv[])
     curses_init();
 
     // loop while the mode isn't 'x', since if it's 'x', the user wants to exit
-    while(ed.getMode() != 'x')
+    while(true)
     {
         ed.updateStatus();
         ed.printStatusLine(stat_win);
@@ -113,13 +113,22 @@ int main(int argc, char* argv[])
 
         int input = getch();
         ed.handleInput(input);
+
+        if (ed.getMode() == 'x')
+        {
+            bool confirmation = showConfirmDialog("Quit?", 
+                 {
+                    "Do you really want to quit?",
+                 }, 32);
+
+            if (confirmation)
+                break;
+            else
+                ed.setMode('n');
+       }
     }
 
     delwin(editor_win);
-
-    showConfirmDialog("Quit?", {
-            "Do you really want to quit?",
-         }, 32);
 
     // refresh and exit once the mode is 'x'
     refresh();

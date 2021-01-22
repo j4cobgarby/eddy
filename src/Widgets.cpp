@@ -45,10 +45,21 @@ bool showConfirmDialog(string title, vector<string> body, int width) {
     wrefresh(dia);
     redrawwin(dia);
     int d_c;
-    while (d_c = getch() != 'y' && d_c != 'n') {}
+    while (true)
+    {
+        switch(d_c = getch())
+        {
+            case 'N':
+            case 'n':
+                return false;
+                break;
+            case 'y':
+            case 'Y':
+                return true;
+                break;
+        }
+    }
     delwin(dia);
-    if (d_c == 'n' || d_c == 'N') return false;
-    return true;
 }
 
 void showInfoDialog(vector<string> body, int width) {

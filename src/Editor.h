@@ -51,6 +51,7 @@ public:
     Editor(string);
 
     char getMode() {return mode;}
+    void setMode(char m) {mode = m;}
 
     void handleInput(int);
     void printBuff(WINDOW * win);
