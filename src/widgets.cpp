@@ -1,4 +1,4 @@
-#include "Widgets.h"
+#include "widgets.h"
 
 bool showConfirmDialog(string title, vector<string> body, int width) {
     string input;
@@ -60,6 +60,9 @@ bool showConfirmDialog(string title, vector<string> body, int width) {
         }
     }
     delwin(dia);
+
+    // I'm returning false because if I don't return anything outside a conditional block, it gives me a warning, and even if I know that reaching this point 
+    return false;
 }
 
 void showInfoDialog(vector<string> body, int width) {

@@ -1,6 +1,6 @@
-#include "Editor.h"
-#include "Widgets.h"
-#include "Language.h"
+#include "editor.h"
+#include "widgets.h"
+#include "language.h"
 
 using namespace std;
 

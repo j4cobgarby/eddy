@@ -1,4 +1,4 @@
-#include "Language.h"
+#include "language.h"
 
 Language::Language(string lang_name, vector<string> file_extensions, map<string, map<int, int>> regexes) {
   this->lang_name = lang_name;

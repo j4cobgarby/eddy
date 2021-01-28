@@ -1,5 +1,5 @@
-#include "Editor.h"
-#include "Widgets.h"
+#include "editor.h"
+#include "widgets.h"
 
 using namespace std;
 

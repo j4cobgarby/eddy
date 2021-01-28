@@ -5,8 +5,8 @@
 #include <fstream>
 #include <sstream>
 
-#include "Buffer.h"
-#include "Language.h"
+#include "buffer.h"
+#include "language.h"
 
 class Editor
 {

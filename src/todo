@@ -1,3 +1,5 @@
+Most important: double buffering so the editor doesn't lag
+
 1. syntax highlighting 
 
 2. completion engine
