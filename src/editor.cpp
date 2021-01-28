@@ -123,7 +123,8 @@ void Editor::handleInput(int c) {
                     }, 54);
                     isnewfile = false;
                 }
-                saveFile();
+                if (filename != "!save")
+                    saveFile();
             }
             mode = 'x';
             break;

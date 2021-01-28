@@ -40,7 +40,7 @@ void curses_init()
     // set colour of window - white bg
     wbkgd(title_win, COLOR_PAIR(1));
     // add a title
-    wprintw(title_win, "\teddytion v0.1b");
+    wprintw(title_win, "\teddytion v0.1.1b");
     // display title
     wrefresh(title_win);
 
@@ -61,15 +61,15 @@ void curses_init()
 
     // Splash dialog
 
-    showInfoDialog({
-        "Hello! Welcome to eddytion v0.1b!",
-        "",
-        "Keep in mind it's in beta, so",
-        "you should expect issues. If",
-        "you do encounter any, it would",
-        "really help to report them on",
-        "the Github repository."
-    }, 37);
+    // showInfoDialog({
+    //    "Hello! Welcome to eddytion v0.1b!",
+    //    "",
+    //    "Keep in mind it's in beta, so",
+    //    "you should expect issues. If",
+    //    "you do encounter any, it would",
+    //    "really help to report them on",
+    //    "the Github repository."
+    // }, 37);
 }
 
 int main(int argc, char* argv[])

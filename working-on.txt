@@ -1,2 +1,1 @@
-done: dialog prompt when existing
-split screen
+cleaning up the codebase
