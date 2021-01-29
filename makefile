@@ -36,3 +36,4 @@ install:
 uninstall:
 	make clean
 	rm /usr/local/bin/eddytion
+

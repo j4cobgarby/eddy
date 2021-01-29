@@ -71,9 +71,11 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 
 ### NORMAL mode commands
 
+*note: there are a lot of keybindings missing in this table mostly because I am not finished with adding all the vim keybindings*
+
 |Key|Action|Notes|
 |---|---|---|
-|`x`|Quits eddytion|Doesn't prompt to save. Make sure you've already saved if you want to keep what you've done.|
+|`x or q`|Quits eddytion|
 |`s`|Saves the current file|If you're not editing a file and instead writing a new file from scratch, eddytion will open a dialog box asking for you to name your new file.|
 |`i`|Enters insert mode.||
 |`[`|Scroll up by one character.|You can of course scroll normally by getting near to the bottom or top of the viewport using the arrow keys.|
@@ -81,28 +83,17 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 |`{`|Scroll up by 10 characters.||
 |`}`|Scroll down by 10 characters.||
 |`f`|Find and replace|The find field takes a regex, but you can find a simple word too. Also, in the replace field, you can include things such as $1 or $2 to get capture groups from the regex.|
-|`o`|Opens a file from a given path.|You're prompted to write the path in a dialog box. If you write nothing, or something which can't be a filename, the file will be named untitled once saved.|
-|`O`|Opens a file from a URL on the internet.|Note that you must type a _capital_ O. You obviously need internet for this to work.|
+|`o`|appends a new line below|
+|`O`|appends a new line above|
 
 ### Opening files
-
-You can open files in many different ways:
-
- - Local file, from command line
 
 ```
 eddytion path/to/file
 ```
 
- - Local file, from eddytion
-
- Press `o` when in `NORMAL` mode.
-
- - File from URL, from eddytion
-
- Press `O` when in `NORMAL` mode.
-
-*Note at the moment, file paths can't include spaces. This is a known issue.*
+### opening files within eddytion
+the code does exist but i haven't decided on an appropriate keybinding for that so.............
 
 ### Creating new files
 

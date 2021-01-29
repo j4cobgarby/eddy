@@ -51,14 +51,17 @@ bool showConfirmDialog(string title, vector<string> body, int width) {
         {
             case 'N':
             case 'n':
+                delwin(dia);
                 return false;
                 break;
             case 'y':
             case 'Y':
+                delwin(dia);
                 return true;
                 break;
         }
     }
+
     delwin(dia);
 
     // I'm returning false because if I don't return anything outside a conditional block, it gives me a warning, and even if I know that reaching this point 
