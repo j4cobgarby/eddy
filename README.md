@@ -1,41 +1,32 @@
 ![](demo.gif)
 
-## Getting started (downloading executable)
+## Description
 
-If you simply want to quickly have a look at eddy, you can download the most recent binary from [releases](https://github.com/j4cobgarby/eddy/releases), but note that these aren't entirely up to date with the commits, and since they've all been built on an ubuntu subsystem on Windows, they won't necessarily work on your computer. In most cases, it's better to build the program yourself for the time being.
+Eddytion is a simple, fast, clean text editor based on the source code for eddy.
 
-## Getting Started (development)
+## Getting Started (installing the program)
 
-Want to develop or test eddy? Follow these instructions to do so!
-
-### Prerequisites
-
- - Preferrably UNIX like OS (e.g. Linux, MacOS, **However, Windows users can use this too, with extra steps**)
- - ncurses
- - g++
-
-#### Debian (or Debian based distros e.g. ubuntu)
-
-```
-sudo apt-get update
-sudo apt-get install libncurses5-dev libncursesw5-dev
-```
-And if you don't already have g++
-```
-sudo apt-get install g++
+#### First install the dependencies with:
+```bash
+sudo apt install libncurses-dev g++ make 
 ```
 
-#### Other linux systems, or MacOS
+#### Then clone the repository with
+```bash
+git clone https://github.com/honestly-nuts/eddytion.git
+```
 
- - [Debian, centos, fedora](https://www.cyberciti.biz/faq/linux-install-ncurses-library-headers-on-debian-ubuntu-centos-fedora/)
- - MacOS
- ```
- brew install curses
- ```
+#### Then cd into the repository and build the app with:
+```bash
+cd eddytion
+sudo make install
+```
 
-#### Windows
+#### Now you are good to go.
 
-If running eddy on windows, it'd be a good idea to _not use cmd_, since some bits (such as dialog boxes) don't work particularly well with it. Use a third party terminal emulator - I'd suggest [Hyper.js](https://hyper.is) since it looks pretty, but an emulator with more features is [Cmder](http://cmder.net).
+### Windows
+
+If running eddytion on windows, it'd be a good idea to _not use cmd_, since some bits (such as dialog boxes) don't work particularly well with it. Use a third party terminal emulator - I'd suggest [Hyper.js](https://hyper.is) since it looks pretty, but an emulator with more features is [Cmder](http://cmder.net).
 
 The best way to get started on Windows is by installing the Windows subsystem for Linux. Basically this is
 a way of opening up an ubuntu shell in Windows! You can find out more about that
@@ -45,32 +36,10 @@ a way of opening up an ubuntu shell in Windows! You can find out more about that
 
 Once you've got the bash shell up and running, you can follow the steps for debian
 
-### Installing for development
-
-Now you're ready to get the development environment set up!
-
-Run these commands in your terminal
-
-```
-git clone https://github.com/j4cobgarby/eddy
-
-cd path/to/repository/root
-
-make clean
-
-make
-```
-
-Now you can simply run it
-
-```
-./eddy
-```
-
 ## Built With
 
-* g++ - The c++ compiler
-* [ncurses](http://invisible-island.net/ncurses/man/ncurses.3x.html) - To do graphical stuff in a terminal
+* g++ - The GNU c++ compiler
+* [ncurses](http://invisible-island.net/ncurses/man/ncurses.3x.html) - To do the interactive stuff in a terminal
 
 ## Contributing
 
@@ -84,14 +53,15 @@ Now you can simply run it
 
 ## How to use
 
-Similar to vim, eddy has different modes for editing files. eddy has two modes:
+Similar to vim, eddytion has different modes for editing files. eddy has two modes:
 
  - `NORMAL`
  - `INSERT`
+ - `VISUAL`
 
 ### NORMAL mode
 
-When you open up eddy, you'll be in `NORMAL`. This is the mode in which you can make use of eddy's
+When you open up eddytion, you'll be in `NORMAL`. This is the mode in which you can make use of eddy's
 different commands. To switch from `NORMAL` to `INSERT`, simply press `i`.
 
 ### INSERT mode
@@ -101,45 +71,36 @@ other editor. When you want to go back into `NORMAL`, press `escape`.
 
 ### NORMAL mode commands
 
+*note: there are a lot of keybindings missing in this table mostly because I am not finished with adding all the vim keybindings*
+
 |Key|Action|Notes|
 |---|---|---|
-|`x`|Quits eddy|Doesn't prompt to save. Make sure you've already saved if you want to keep what you've done.|
-|`s`|Saves the current file|If you're not editing a file and instead writing a new file from scratch, eddy will open a dialog box asking for you to name your new file.|
+|`x or q`|Quits eddytion|
+|`s`|Saves the current file|If you're not editing a file and instead writing a new file from scratch, eddytion will open a dialog box asking for you to name your new file.|
 |`i`|Enters insert mode.||
 |`[`|Scroll up by one character.|You can of course scroll normally by getting near to the bottom or top of the viewport using the arrow keys.|
 |`]`|Scroll down by one character.|See above.|
 |`{`|Scroll up by 10 characters.||
 |`}`|Scroll down by 10 characters.||
 |`f`|Find and replace|The find field takes a regex, but you can find a simple word too. Also, in the replace field, you can include things such as $1 or $2 to get capture groups from the regex.|
-|`o`|Opens a file from a given path.|You're prompted to write the path in a dialog box. If you write nothing, or something which can't be a filename, the file will be named untitled once saved.|
-|`O`|Opens a file from a URL on the internet.|Note that you must type a _capital_ O. You obviously need internet for this to work.|
+|`o`|appends a new line below|
+|`O`|appends a new line above|
 
 ### Opening files
 
-You can open files in many different ways:
-
- - Local file, from command line
-
 ```
-eddy path/to/file
+eddytion path/to/file
 ```
 
- - Local file, from eddy
-
- Press `o` when in `NORMAL` mode.
-
- - File from URL, from eddy
-
- Press `O` when in `NORMAL` mode.
-
-*Note at the moment, file paths can't include spaces. This is a known issue.*
+### opening files within eddytion
+the code does exist but i haven't decided on an appropriate keybinding for that so.............
 
 ### Creating new files
 
 You can create a new file the same way you'd open one which already exists. Suppose you want to create a file called `new_file.txt`, you could do this
 
 ```
-eddy new_file.txt
+eddytion new_file.txt
 ```
 
 And then, once it's loaded, press `s` to create it.
@@ -148,18 +109,19 @@ Alternatively you could rely on your operating system's commands
 
 ```
 touch new_file.txt
-eddy new_file.txt
+eddytion new_file.txt
 ```
 
 or something like that. If that doesn't work, you could always do
 
 ```
 echo> new_file.txt
-eddy new_file.txt
+eddytion new_file.txt
 ```
 
 ## Authors
 
-* **Jacob Garby** - *Initial development* - [j4cobgarby](https://github.com/j4cobgarby)
+* **Honestly Nuts** - *Eddytion developer* - [Honestly Nuts](https://github.com/honestly-nuts)
+* **Jacob Garby** - *Eddy developer* - [j4cobgarby](https://github.com/j4cobgarby)
 
-See also the list of [contributors](https://github.com/j4cobgarby/eddy/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/honestly-nuts/eddytion/contributors) who participated in this project.

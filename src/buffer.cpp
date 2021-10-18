@@ -1,4 +1,4 @@
-#include "Buffer.h"
+#include "buffer.h"
 
 Buffer::Buffer() {}
 
@@ -8,6 +8,14 @@ string Buffer::remTabs(string line) {
         return line;
     else
         return remTabs(line.replace(tab, 1, string(4, ' ')));
+}
+
+string Buffer::toString() {
+    string out;
+    for (string ln : lines) {
+        out += ln += "\n";
+    }
+    return out;
 }
 
 void Buffer::insertLine(string line, int n) {
@@ -24,10 +32,3 @@ void Buffer::removeLine(int n) {
     lines.erase(lines.begin()+n);
 }
 
-string Buffer::toString() {
-    string out;
-    for (string ln : lines) {
-        out += ln += "\n";
-    }
-    return out;
-}

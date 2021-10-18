@@ -1,5 +1,5 @@
-#include "Editor.h"
-#include "Widgets.h"
+#include "editor.h"
+#include "widgets.h"
 
 using namespace std;
 
@@ -55,7 +55,10 @@ void Editor::updateStatus() {
         status += "Exiting";
         break;
     }
+
     status += "\t" + to_string(y + 1 + scrolly) + ":" + to_string(x + 1) + "\t" + filename;
+
+    status += "\t" + to_string(scrolly) + "&&" + to_string(scrollx); // debug
     if (modified) {
         status += "*";
     }
@@ -79,6 +82,20 @@ void Editor::handleInput(int c) {
     switch(mode) {
     case 'n':
         switch(c) {
+        // hjkl movement
+        case 'h':
+            moveLeft();
+            return;
+        case 'l':
+            moveRight();
+            return;
+        case 'k':
+            moveUp();
+            return;
+        case 'j':
+            moveDown();
+            return;
+        // hjkl movement
         case ']':
             scrollDown();
             break;
@@ -97,19 +114,21 @@ void Editor::handleInput(int c) {
         case '<':
             scrollLeft();
             break;
-        case 'x':
-            if (modified) {
-                if (isnewfile) {
-                    filename = getDialogInput("Save", {
-                        "Don't forget to name your file!",
-                        "You're currently editing an untitled",
-                        "file, which isn't a very good name.",
-                        "Type the name (or path) below"
-                    }, 54);
-                    isnewfile = false;
-                }
-                saveFile();
+
+        case 'd':
+            if (y == 0)
+            {
+                buff->insertLine("", y+scrolly);
+                deleteLine(y+scrolly+1);
+                x = 0;
+                break;
             }
+            deleteLine(y+scrolly);
+            moveUp();
+            break;
+
+        case 'x':
+        case 'q':
             mode = 'x';
             break;
         case 'i':
@@ -131,28 +150,45 @@ void Editor::handleInput(int c) {
             {
                 {
                     vector<string> fields = getFindReplaceFields();
-                    string find_field = fields.at(0);
-                    string replace_field = fields.at(1);
-                    doFindReplace(find_field, replace_field);
+                    
+                    doFindReplace(fields.at(0), fields.at(1));
                     modified = true;
                     x = 0;
                 }
                 break;
             }
         case 'o':
-            openFile(getDialogInput("Open", {
-                "Type a file path"
-            }, 40));
+            // openFile(getDialogInput("Open", {
+                // "Type a file path"
+            // }, 40));
+            
+            buff->insertLine("", y+scrolly+1);
+            moveDown();
+
+            modified = true;
+            mode = 'i';
+
             break;
         case 'O':
-            {
-              vector<string> fields = getOpenURLFields();
-              string wget = "wget -O "+fields.at(1)+" "+fields.at(0);
-              system(wget.c_str());
-              openFile(fields.at(1));
-            }
+            //{
+//               vector<string> fields = getOpenURLFields();
+//               string wget = "wget -O "+fields.at(1)+" "+fields.at(0);
+//               system(wget.c_str());
+//               openFile(fields.at(1));
+            // }
+
+            if (y == 0)
+                break;
+
+            buff->insertLine("", y+scrolly-1);
+            moveDown();
+
+            modified = true;
+            mode = 'i';
+
         }
         break;
+
     case 'i':
         switch(c) {
         case 27:

@@ -1,5 +1,4 @@
-#ifndef BUFFER_H
-#define BUFFER_H
+#pragma once
 
 #include <string>
 #include <vector>
@@ -20,5 +19,3 @@ public:
     string remTabs(string);
     string toString();
 };
-
-#endif

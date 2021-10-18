@@ -1,4 +1,4 @@
-#include "Widgets.h"
+#include "widgets.h"
 
 bool showConfirmDialog(string title, vector<string> body, int width) {
     string input;
@@ -45,10 +45,27 @@ bool showConfirmDialog(string title, vector<string> body, int width) {
     wrefresh(dia);
     redrawwin(dia);
     int d_c;
-    while (d_c = getch() != 'y' && d_c != 'n') {}
+    while (true)
+    {
+        switch(d_c = getch())
+        {
+            case 'N':
+            case 'n':
+                delwin(dia);
+                return false;
+                break;
+            case 'y':
+            case 'Y':
+                delwin(dia);
+                return true;
+                break;
+        }
+    }
+
     delwin(dia);
-    if (d_c == 'n' || d_c == 'N') return false;
-    return true;
+
+    // I'm returning false because if I don't return anything outside a conditional block, it gives me a warning, and even if I know that reaching this point 
+    return false;
 }
 
 void showInfoDialog(vector<string> body, int width) {

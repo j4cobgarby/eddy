@@ -1,5 +1,4 @@
-#ifndef WIDGETS_H
-#define WIDGETS_H
+#pragma once
 
 #include <ncurses.h>
 #include <string>
@@ -12,5 +11,3 @@ void             showInfoDialog       (vector<string>, int);
 string           getDialogInput       (string, vector<string>, int);
 vector<string>   getFindReplaceFields ();
 vector<string>   getOpenURLFields     ();
-
-#endif

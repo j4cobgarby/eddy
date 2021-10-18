@@ -1,14 +1,12 @@
-#ifndef EDITOR_H
-#define EDITOR_H
+#pragma once
 
 #include <ncurses.h>
 #include <regex>
 #include <fstream>
-#include <iostream>
 #include <sstream>
 
-#include "Buffer.h"
-#include "Language.h"
+#include "buffer.h"
+#include "language.h"
 
 class Editor
 {
@@ -53,6 +51,7 @@ public:
     Editor(string);
 
     char getMode() {return mode;}
+    void setMode(char m) {mode = m;}
 
     void handleInput(int);
     void printBuff(WINDOW * win);
@@ -64,5 +63,3 @@ public:
     vector<Language> langs;
     Language current_lang;
 };
-
-#endif

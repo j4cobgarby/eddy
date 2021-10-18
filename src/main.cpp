@@ -1,12 +1,6 @@
-#include <ncurses.h>
-#include <string>
-#include <iostream>
-#include <fstream>
-#include <sstream>
-
-#include "Editor.h"
-#include "Widgets.h"
-#include "Language.h"
+#include "editor.h"
+#include "widgets.h"
+#include "language.h"
 
 using namespace std;
 
@@ -46,7 +40,7 @@ void curses_init()
     // set colour of window - white bg
     wbkgd(title_win, COLOR_PAIR(1));
     // add a title
-    wprintw(title_win, "\teddy v1.2");
+    wprintw(title_win, "\teddytion v0.1.1b");
     // display title
     wrefresh(title_win);
 
@@ -67,15 +61,15 @@ void curses_init()
 
     // Splash dialog
 
-    showInfoDialog({
-        "Hello! Welcome to eddy v0.4b!",
-        "",
-        "Keep in mind it's in beta, so",
-        "you should expect issues. If",
-        "you do encounter any, it would",
-        "really help to report them on",
-        "the Github repository."
-    }, 36);
+    // showInfoDialog({
+    //    "Hello! Welcome to eddytion v0.1b!",
+    //    "",
+    //    "Keep in mind it's in beta, so",
+    //    "you should expect issues. If",
+    //    "you do encounter any, it would",
+    //    "really help to report them on",
+    //    "the Github repository."
+    // }, 37);
 }
 
 int main(int argc, char* argv[])
@@ -103,7 +97,7 @@ int main(int argc, char* argv[])
     curses_init();
 
     // loop while the mode isn't 'x', since if it's 'x', the user wants to exit
-    while(ed.getMode() != 'x')
+    while(true)
     {
         ed.updateStatus();
         ed.printStatusLine(stat_win);
@@ -119,7 +113,22 @@ int main(int argc, char* argv[])
 
         int input = getch();
         ed.handleInput(input);
+
+        if (ed.getMode() == 'x')
+        {
+            bool confirmation = showConfirmDialog("Quit?", 
+                 {
+                    "Do you really want to quit?",
+                 }, 32);
+
+            if (confirmation)
+                break;
+            else
+                ed.setMode('n');
+       }
     }
+
+    delwin(editor_win);
 
     // refresh and exit once the mode is 'x'
     refresh();
